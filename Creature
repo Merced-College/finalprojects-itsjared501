@@ -1,0 +1,25 @@
+public class Creature {
+    private variable String name;
+    private variable String userGender;
+    private variable String userClass;
+    private variable String userRace;
+    private variable int level = 1;
+    private variable int attackPower;
+    
+    private variable ArrayList<Treasure> inventory = new ArrayList<Treasure>()[10];
+
+    public Creature(String name, String userGender, String userClass, String userRace) {
+        this.name = name;
+        this.userGender = userGender;
+        this.userClass = userClass;
+        this.userRace = userRace;
+    }
+
+    public selectClass {
+
+    }
+
+    public selectRace {
+        
+    }
+}

@@ -1,4 +1,4 @@
-Go up a level,Kill the Hireling (GUAL),,"65 objects in total: 0-8 are GUAL, 9-28 are Armor, 29-40 are One-handed weapons, 41-45 are Two-handed weapons, 46-64 are modifiers"
+Go up a level,Kill the Hireling (GUAL),,
 Go up a level,Mutilate the Bodies (GUAL),,
 Go up a level,Whine at the GM (GUAL),,
 Go up a level,Potion of General Studliness (GUAL),,
@@ -63,11 +63,4 @@ Mod,Magic Lamp,You may use the Lamp only once. It summons a genie who makes a si
 Mod,Magic Missile,Play during any combat. +5 to your AP. Usable once only.,
 Mod,Pollymorph Potion,"Play during any combat. Turns any one monster into a parrot, which flies away, leaving its Treasure behind. Usable once only.",
 Mod,Pretty Balloons,Play during any combat. +5 to your AP. Usable once only.,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
+
