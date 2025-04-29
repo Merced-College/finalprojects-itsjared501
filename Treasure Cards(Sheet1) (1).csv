@@ -41,30 +41,23 @@ Footgear,Boots of Running Really Fast,1,
 Footgear,Pantyhose of Giant Strength,3,
 Footgear,Sandals of Protection,1,
 Footgear,Spiky Knees,1,
-Mod,Cotion of Ponfusion,Play during any combat. +3 to your AP. Usable once only.,give this to the thief as a starter bonus.
-Mod,Flaming Poison Potion,Play during any combat. +3 to your AP. Usable once only.,give this to the wizard as a starter bonus.
-Mod,Nasty-Tasting Sports Drink,Play during any combat. +2 to your AP. Usable once only.,give this to the dwarf as a starter bonus.
+Mod,Cotion of Ponfusion,"Play during any combat. +3 to your AP. Usable once only.",give this to the thief as a starter bonus.
+Mod,Flaming Poison Potion,"Play during any combat. +3 to your AP. Usable once only.",give this to the wizard as a starter bonus.
+Mod,Nasty-Tasting Sports Drink,"Play during any combat. +2 to your AP. Usable once only.",give this to the dwarf as a starter bonus.
 Mod,Potion of Halitosis,"Play during any combat. +2 to your AP, or instatnly kills the Floating Nose. Usable once only.",give this to the cleric as a starter bonus.
-Mod,Potion of Idiotic Bravery,Play during any combat. +2 to your AP. Usable once only.,give this to the warrior as a starter bonus.
-Mod,Sleep Potion,Play during any combat. +2 to your AP. Usable once only.,give this to the halfling as a starter bonus.
+Mod,Potion of Idiotic Bravery,"Play during any combat. +2 to your AP. Usable once only.",give this to the warrior as a starter bonus.
+Mod,Sleep Potion,"Play during any combat. +2 to your AP. Usable once only.",give this to the halfling as a starter bonus.
 Mod,Yuppie Water,"Play during any combat. Usable once only, and only buffs Elves. All Elves in battle gain +2 to their AP.",give this to the elf as a starter bonus.
 Mod,Doppleganger,"Summons your exact duplicate, who fights beside you, so you double your combat strength. Usable once only.",
-Mod,Electric Radioactive Acid Potion,Play during any combat. +5 to your AP. Usable once only.,
+Mod,Electric Radioactive Acid Potion,"Play during any combat. +5 to your AP. Usable once only.",
 Mod,Flask of Glue,"Play during any combat. The Monster is stuck in a really sticky glue and cannot move! The Monster cannot attack, but will attempt to break free after being hit.",
-Mod,Freezing Explosive Potion,Play during any combat. +3 to your AP. Usable once only.,
-Mod,Friendship Potion,Play during any combat. All Monsters in comabt now become bestest of friends! Gain one Treasure. ,
-Mod,Hoard!,Draw 3 more Treasures immediately!,
-Mod,Instant Wall,Allows automatic and immediate escape from any fight. Usable once only.,
-Mod,Invisibility Potion,Play when your Run Away roll fails. You escape automaticaly. Usable once only.,
-Mod,Magic Lamp,You may use the Lamp only once. It summons a genie who makes a single monster vanish. Take all its Treasure but don't level up.,
-Mod,Magic Missile,Play during any combat. +5 to your AP. Usable once only.,
+Mod,Freezing Explosive Potion,"Play during any combat. +3 to your AP. Usable once only.",
+Mod,Friendship Potion,"Play during any combat. All Monsters in comabt now become bestest of friends! Gain one Treasure.",
+Mod,Hoard!,"Draw 3 more Treasures immediately!",
+Mod,Instant Wall,"Allows automatic and immediate escape from any fight. Usable once only.",
+Mod,Invisibility Potion,"Play when your Run Away roll fails. You escape automaticaly. Usable once only.",
+Mod,Magic Lamp,"You may use the Lamp only once. It summons a genie who makes a single monster vanish. Take all its Treasure but don't level up.",
+Mod,Magic Missile,"Play during any combat. +5 to your AP. Usable once only.",
 Mod,Pollymorph Potion,"Play during any combat. Turns any one monster into a parrot, which flies away, leaving its Treasure behind. Usable once only.",
-Mod,Pretty Balloons,Play during any combat. +5 to your AP. Usable once only.,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
+Mod,Pretty Balloons,"Play during any combat. +5 to your AP. Usable once only.",
+
