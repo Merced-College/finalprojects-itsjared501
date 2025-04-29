@@ -3,4 +3,4 @@ Welcome to Munchkin, where you play a custom character and fight your way to the
 
 To beat monsters, your attack power (your level +/- any modifiers) must be greater than the monster's attack power (their level +/- any modifiers). If your attack power is less than or equal to the monster's attack power, then bad stuff happens! Of course if you can't beat the monster, you can always attempt to run away. To successfully run away, you must roll a die and get a 4 or higher; otherwise you fail to run away and the bad stuff occurs. The game will end once you reach level 10 or YOU DIE!
 
-Armor and items can help boost your attack power for your fights. You can always have on 1 armor, 2 one-hand weapons (or 1 big handed weapon), and 1 footgear.
+Armor and items can help boost your attack power for your fights. You can always have on 1 armor, 2 one-hand weapons (or 1 big handed weapon), and 1 footgear. Equipping new gear will replace the old gear. However, you can only hold up to a max of 10 items in your inventory before being forced to discard items.
