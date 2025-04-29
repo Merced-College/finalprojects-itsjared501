@@ -1,1 +1,4 @@
-# cpsc39-finalProjects
+# Munchkin Game (Text-Scroller Version)
+Welcome to Munchkin, where you play a custom character and fight your way to the top! You must fight monsters and level up; reach level 10 and you win! You'll face creatures like scary lawyers to a fierce squidzilla! You'll pick your class, race, and be given preset starting items. Each class will have their own abilities and each race will have their own advantages (AND disadvantages!!!) You start your journey at level 1 and work your way up, leveling up and obtaining loot after defeating monsters. 
+
+To beat monsters, your attack power (your level +/- any modifiers) must be greater than the monster's attack power (their level +/- any modifiers). If your attack power is less than or equal to the monster's attack power, then bad stuff happens! Of course if you can't beat the monster, you can always attempt to run away. To successfully run away, you must roll a die and get a 4 or higher; otherwise you fail to run away and the bad stuff occurs. The game will end once you reach level 10 or YOU DIE!
