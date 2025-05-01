@@ -14,7 +14,7 @@ class Game {
         System.out.println("(It is recommended you read the README file before playing this game.)");
         System.out.println(" ");;
         System.out.println("Welcome to the epicness that is Munchkin! The game of pure uniqueness and chance, probability, and...yeah. You get the point.");
-        Thread.sleep(3000);//this will be used to pause the program for 3 seconds
+        Thread.sleep(4000);//this will be used to pause the program for 3 seconds
         System.out.println("To start off your journey, tell me about yourself!");
         System.out.print("What is your name? ");
         String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
@@ -32,7 +32,7 @@ class Game {
         Thread.sleep(4000); //this will be used to pause the program for 2 seconds
         user.selectRace(); //this will be used to select the race of the user
 
-        System.out.println("Fascinating! Well it's nice to meet you " + user.getName() + ", the " + user.getUserRace() + " " + user.getUserClass() + "!");
+        System.out.println("Fascinating! Well it's nice to meet you, " + user.getName() + " the " + user.getUserRace() + " " + user.getUserClass() + "!");
 
         //bring up the selectRace method to allow the user to select one
 

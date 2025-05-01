@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Creature {
     private String name;
     private String userGender;
-    private int userClass;
-    private int userRace;
+    private String userClass;
+    private String userRace;
     private int level = 1;
     private int attackPower;
     
@@ -19,11 +19,30 @@ public class Creature {
     }
 
     public void setClass (int chosenClass) {
-        
+        if (chosenClass == 1) {
+            userClass = "Cleric";
+        } 
+        else if (chosenClass == 2) {
+            userClass = "Thief";
+        } 
+        else if (chosenClass == 3) {
+            userClass = "Warrior";
+        } 
+        else if (chosenClass == 4) {
+            userClass = "Wizard";
+        }
     }
 
     public void setRace (int chosenRace) {
-    
+        if (chosenRace == 1) {
+            userRace = "Dwarf";
+        } 
+        else if (chosenRace == 2) {
+            userRace = "Elven";
+        } 
+        else if (chosenRace == 3) {
+            userRace = "Halfling";
+        }
     }
 
     public String getName() {
@@ -34,11 +53,11 @@ public class Creature {
         return userGender;
     }
 
-    public int getUserClass() {
+    public String getUserClass() {
         return userClass;
     }
 
-    public int getUserRace() {
+    public String getUserRace() {
         return userRace;
     }
 
@@ -57,7 +76,7 @@ public class Creature {
     public void selectClass() {
         //display all classes and their passives
         System.out.println(" ");
-        System.out.println("Classes -");
+        System.out.println("Classes * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println("");
         System.out.println("1. Cleric - The divine warrior of a worshipped deity. Capable of using their faith and devotion to defend,");
         System.out.println("            smite, and call upon their god.");
@@ -85,8 +104,9 @@ public class Creature {
         System.out.println("               all treasures but do not level up.");
         System.out.println("Arcane Immunity:   Those sleepless nights studying Defense Against the Dark Arts have paid off.");
         System.out.println("                   You are immune to curses.");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a class by entering the number of the class you want to select."); //ask for int (class)
+        System.out.print("Select a class by entering the number of the class you want to select. "); //ask for int (class)
         int classSelection = scanner.nextInt();
         setClass(classSelection); //this will be used to set the class of the user
     }
@@ -94,15 +114,15 @@ public class Creature {
     public void selectRace() {
         //display all races and their advantages and disadvantages
         System.out.println(" ");
-        System.out.println("Races -");
-        System.out.println("");
-        System.out.println("1. Dwarf");
+        System.out.println("Races * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        System.out.println(" ");
+        System.out.println("1. Dwarf - ");
         System.out.println("Swag Bag:    Mighty though tiny, you're used to carrying a lot of stuff.");
         System.out.println("             You can carry 2 extra items in your inventory.");
         System.out.println("Worker of Metal:    You've got a knack for metalwork and smithing.");
         System.out.println("                    When using a big item, you receive a +1 to your attack power.");
         System.out.println(" ");
-        System.out.println("2. Elf");
+        System.out.println("2. Elf - ");
         System.out.println("Pointy-Ears:   AHHHHHH! You-your ears are so pointy! So intimidating!");
         System.out.println("               Monsters receive -1 to their attack power.");
         System.out.println("Beautacious and Vivacious:   You are the most beautiful person in the world. (In the game at least.)");
@@ -115,8 +135,9 @@ public class Creature {
         System.out.println("                                     You have 2 attempts to run away from a monster.");
         System.out.println("Small body, Big Heart:   Empathy goes a long way. Tell your exes that.");
         System.out.println("                         You are immune to the bad stuff of Monsters level 1-10.");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a race by entering the number of the race you want to select."); //ask for int (race)
+        System.out.print("Select a race by entering the number of the race you want to select. "); //ask for int (race)
         int raceSelection = scanner.nextInt();
         setRace(raceSelection); //this will be used to set the race of the user
     }
