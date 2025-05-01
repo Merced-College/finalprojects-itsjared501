@@ -83,8 +83,8 @@ public class Creature {
         System.out.println("Charm Spell:   Decades of academic study combined with your killer looks come in handy every now and then.");
         System.out.println("               While in combat, you may discard your entire inventory to automatically beat the monster. You obtain");
         System.out.println("               all treasures but do not level up.");
-        System.out.println("Flight Spell:   Those couple of weeks in beastial studies have taught you that you can't win every fight.");
-        System.out.println("                While in combat, you may discard 1 item from your inventory to gain +1 to your Run Away roll.");
+        System.out.println("Arcane Immunity:   Those sleepless nights studying Defense Against the Dark Arts have paid off.");
+        System.out.println("                   You are immune to curses.");
         System.out.println(" ");
         System.out.print("Select a class by entering the number of the class you want to select."); //ask for int (class)
         int classSelection = scanner.nextInt();
