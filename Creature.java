@@ -1,12 +1,14 @@
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Creature {
     private String name;
     private String userGender;
-    private String userClass;
-    private String userRace;
+    private int userClass;
+    private int userRace;
     private int level = 1;
     private int attackPower;
+    private Scanner scanner = new Scanner(System.in);
     
     //private ArrayList<Treasure> inventory = new ArrayList<Treasure>()[10];
 
@@ -23,11 +25,11 @@ public class Creature {
         return userGender;
     }
 
-    public String getUserClass() {
+    public int getUserClass() {
         return userClass;
     }
 
-    public String getUserRace() {
+    public int getUserRace() {
         return userRace;
     }
 
@@ -43,33 +45,43 @@ public class Creature {
         return inventory;
     }*/
 
-    public selectClass() {
+    public void selectClass() {
         //display all classes and their abilities
         //ask the user to select a class
+        System.out.println(" ");
         System.out.println("Classes -");
+        System.out.println("");
         System.out.println("1. Cleric");
-        System.out.println("");
-        System.out.println("");
+        System.out.println("Divine Intervention:    Monsters are blinded by the holy light (it's a stagelight).");
+        System.out.println("                        Monsters receive -1 to their attack power.");
+        System.out.println("Holy Hands:   Your god has given you the power to smite your foes with a light touch.");
+        System.out.println("              When you do not have a weapon equipped, you gain +2 to your attack power.");
         System.out.println(" ");
         System.out.println("2. Thief");
-        System.out.println("Expertise:   You gain an extra treasure when looting the room.");
-        System.out.println("Slippery Feet:   You gain +1 to run away.");
+        System.out.println("Expertise:   A good fight comes with greater rewards, whether its given or stolen.");
+        System.out.println("             You gain an extra treasure when looting the room.");
+        System.out.println("Slippery Feet:   Your perspiration has left pools of sweat behind you.");
+        System.out.println("                 You gain +1 to run away.");
         System.out.println(" ");
         System.out.println("3. Warrior");
-        System.out.println("Hard-Hitter:   You gain +1 to attack power.");
-        System.out.println("Duelist:   You now win ties in combat.");
+        System.out.println("Hard-Hitter:   Years of training have given you the advantage in combat.");
+        System.out.println("               You gain +1 to attack power.");
+        System.out.println("Duelist:   You don't go down without a fight.");
+        System.out.println("           You now win ties in combat.");
         System.out.println(" ");
         System.out.println("4. Wizard");
-        System.out.println("Charm:   While in combat, you may discard your entire inventory to automatically beat the monster. You obtain all treasures but do not level up.");
-        System.out.println("Potion Master:   ");
+        System.out.println("Charm Spell:   Decades of academic study combined with your killer looks come in handy every now and then.");
+        System.out.println("               While in combat, you may discard your entire inventory to automatically beat the monster. You obtain all treasures but do not level up.");
+        System.out.println("Flight Spell:   Those couple of weeks in beastial studies have taught you that you can't win every fight.");
+        System.out.println("                While in combat, you may discard 1 item from your inventory to gain +1 to your Run Away roll.");
         System.out.println(" ");
         System.out.println("Select a class by entering the number of the class you want to select.");
-        String classSelection = scanner.nextLine();
+        int classSelection = scanner.nextInt();
         userClass = classSelection;
     }
 
-    public selectRace() {
+    /* public selectRace() {
         //display all races and their advantages and disadvantages
         //ask the user to select a race
-    }
+    } */
 }

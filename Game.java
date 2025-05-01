@@ -14,12 +14,13 @@ class Game {
         System.out.print("What is your name? ");
         String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
 
-        System.out.print("What is your gender? Male/Female");
+        System.out.print("What is your gender? Male/Female: ");
         String gender = scanner.nextLine(); //this will be used to create the user object of the class Creature
 
         Creature user = new Creature(name, gender); //uses the constructor to create the user object
 
-        System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what race are you?");
+        System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");
+        user.selectClass(); //this will be used to select the class of the user
 
         //bring up the selectRace method to allow the user to select one
 
