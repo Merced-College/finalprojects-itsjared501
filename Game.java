@@ -25,8 +25,14 @@ class Game {
         Creature user = new Creature(name, gender); //uses the constructor to create the user object
 
         System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");
-        Thread.sleep(5000); //this will be used to pause the program for 2 seconds
+        Thread.sleep(4000); //this will be used to pause the program for 2 seconds
         user.selectClass(); //this will be used to select the class of the user
+
+        System.out.println("I see I see... how interesting. Lastly what race are you? (I know, sensitive topic, but I need to know.)");
+        Thread.sleep(4000); //this will be used to pause the program for 2 seconds
+        user.selectRace(); //this will be used to select the race of the user
+
+        System.out.println("Fascinating! Well it's nice to meet you " + user.getName() + ", the " + user.getUserRace() + " " + user.getUserClass() + "!");
 
         //bring up the selectRace method to allow the user to select one
 
