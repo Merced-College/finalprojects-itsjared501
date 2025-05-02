@@ -8,6 +8,7 @@ public class Creature {
     private String userRace;
     private int level = 1;
     private int attackPower;
+    //private boolean isAlive = true;
     
     Scanner scanner = new Scanner(System.in);
     
