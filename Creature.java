@@ -117,13 +117,13 @@ public class Creature {
         System.out.println(" ");
         System.out.println("Races * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.println("1. Dwarf - ");
+        System.out.println("1. Dwarf - Short but mighty and bulky, these creatures are very capable and skilled in their crafts.");
         System.out.println("Swag Bag:    Mighty though tiny, you're used to carrying a lot of stuff.");
         System.out.println("             You can carry 2 extra items in your inventory.");
         System.out.println("Worker of Metal:    You've got a knack for metalwork and smithing.");
         System.out.println("                    When using a big item, you receive a +1 to your attack power.");
         System.out.println(" ");
-        System.out.println("2. Elf - ");
+        System.out.println("2. Elf - Tall, slender, and graceful. They're known for their keen senses and beautiful features that catches the eye.");
         System.out.println("Pointy-Ears:   AHHHHHH! You-your ears are so pointy! So intimidating!");
         System.out.println("               Monsters receive -1 to their attack power.");
         System.out.println("Beautacious and Vivacious:   You are the most beautiful person in the world. (In the game at least.)");

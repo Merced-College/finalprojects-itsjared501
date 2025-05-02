@@ -37,6 +37,16 @@ class Game {
 
         //finalize the user name, race, and class
         System.out.println("Fascinating! Well it's nice to meet you, " + user.getName() + " the " + user.getUserRace() + " " + user.getUserClass() + "!");
+        Thread.sleep(2000); //this will be used to pause the program for 2 seconds, allowing the user to read the previous text
+        System.out.print("Now, are you ready to begin your journey into the unknown oh faithful" + user.getUserClass() + "? Y/N");
+        String ready = scanner.nextLine(); //this will be used to get the user input of whether they are ready or not
+        if (ready.equalsIgnoreCase("Y")) {
+            //method to begin the game
+        }
+        else if (ready.equalsIgnoreCase("N")) {
+            System.out.println("Well that's too bad. You're already here, so here's the damn game.");
+            //method to begin the game
+        }
 
         scanner.close();
     }
@@ -55,7 +65,7 @@ class Game {
 
     //treasureLoot method (gives loot after defeating a monster or looting the room)
 
-    
+
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
         gameIntro(); //call gameIntro method to start the game
