@@ -1,18 +1,56 @@
 //Jared Lee
 //April 29, 2025
 //This is a text-based RPG game based on the card game Munchkin.
-/*import java.io.BufferedReader;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map; */
+import java.util.Map;
 import java.util.Scanner;
 //import java.util.ArrayList;
 
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
+
+    //csv reader for the treasure cards, method that reads the treasure from the csv file and creates a hashmap of the treasure cards
+    public static Map<String, List<String[]>> readTreasureCards(String filePath) {
+        Map<String, List<String[]>> treasures = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            String currentSection = null;
+
+            while ((line = br.readLine()) != null) {
+                // Skip empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                // Split the line into columns
+                String[] columns = line.split(",", -1); // -1 ensures empty columns are preserved
+
+                // Check if the first column indicates a new section
+                if (columns[0].equalsIgnoreCase("Go up a level") ||
+                    columns[0].equalsIgnoreCase("Armor") ||
+                    columns[0].equalsIgnoreCase("Hand") ||
+                    columns[0].equalsIgnoreCase("Hands") ||
+                    columns[0].equalsIgnoreCase("Footgear") ||
+                    columns[0].equalsIgnoreCase("Mod")) {
+                    currentSection = columns[0];
+                    treasures.putIfAbsent(currentSection, new ArrayList<>());
+                }
+
+                // Add the row to the current section
+                if (currentSection != null) {
+                    treasures.get(currentSection).add(columns);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+        return treasures;
+    }
 
     //csv reader for the monster cards
 
@@ -82,6 +120,8 @@ class Game {
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
         gameIntro(); //call gameIntro method to start the game
+
+        //Map<String, List<String[]>> treasures = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
 
         //do while loop to keep the game going until the user is level 10 or is dead
     }
