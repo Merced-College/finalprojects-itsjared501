@@ -46,6 +46,11 @@ public class Creature {
         }
     }
 
+    public void addAttackPower(int power) {
+        this.attackPower += power;
+        System.out.println("Attack power increased by " + power + ". Total attack power: " + this.attackPower);
+    }
+
     public String getName() {
         return name;
     }

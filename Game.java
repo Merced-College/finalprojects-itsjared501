@@ -1,11 +1,24 @@
 //Jared Lee
 //April 29, 2025
 //This is a text-based RPG game based on the card game Munchkin.
+/*import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map; */
 import java.util.Scanner;
 //import java.util.ArrayList;
 
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
+
+    //csv reader for the monster cards
+
+
+    //csv reader for the curse cards
+
 
     //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
     public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
