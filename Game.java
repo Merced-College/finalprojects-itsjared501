@@ -50,13 +50,12 @@ class Game {
         }
         return treasures;
     }
+    /*
+     public static LinkedList<Treasure> readTreasureCardsToLinkedList(String filePath) {
+        LinkedList<Treasure> treasures = new LinkedList<>();
 
-    //csv reader for the monster cards
-    public static Map<String, List<String[]>> readMonsterCards(String filePath) {
-        Map<String, List<String[]>> treasures = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            String currentSection = null;
 
             while ((line = br.readLine()) != null) {
                 // Skip empty lines
@@ -67,27 +66,32 @@ class Game {
                 // Split the line into columns
                 String[] columns = line.split(",", -1); // -1 ensures empty columns are preserved
 
-                // Check if the first column indicates a new section
-                if (columns[0].equalsIgnoreCase("Go up a level") ||
-                    columns[0].equalsIgnoreCase("Armor") ||
-                    columns[0].equalsIgnoreCase("Hand") ||
-                    columns[0].equalsIgnoreCase("Hands") ||
-                    columns[0].equalsIgnoreCase("Footgear") ||
-                    columns[0].equalsIgnoreCase("Mod")) {
-                    currentSection = columns[0];
-                    treasures.putIfAbsent(currentSection, new ArrayList<>());
-                }
+                // Parse the treasure details
+                try {
+                    String section = columns[0].trim(); // Column 1: Section (e.g., "Armor")
+                    String name = columns[1].trim();    // Column 2: Name (unique key)
+                    int attackPower = columns[2].trim().isEmpty() ? 0 : Integer.parseInt(columns[2].trim()); // Column 3: Attack power
+                    String description = columns.length > 3 ? columns[3].trim() : ""; // Column 4: Description (if present)
 
-                // Add the row to the current section
-                if (currentSection != null) {
-                    treasures.get(currentSection).add(columns);
+                    // Create a Treasure object
+                    Treasure treasure = new Treasure(section, name, attackPower, description);
+
+                    // Add the Treasure object to the LinkedList
+                    treasures.add(treasure);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Invalid line format: " + line);
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
         }
+
         return treasures;
     }
+     */
+
+    //csv reader for the monster cards into an arraylist
+    
 
     //csv reader for the curse cards
 
