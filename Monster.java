@@ -1,3 +1,4 @@
 public class Monster {
-    //read in the monster cards csv file and create a hashmap of the monster cards
+    //csv reader for the monster cards, method that reads the monsters from the csv file and creates a hashmap of the monster cards}
+
 }
