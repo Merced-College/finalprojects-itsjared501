@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-//import java.util.ArrayList;
 
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
@@ -53,7 +52,42 @@ class Game {
     }
 
     //csv reader for the monster cards
+    public static Map<String, List<String[]>> readMonsterCards(String filePath) {
+        Map<String, List<String[]>> treasures = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            String currentSection = null;
 
+            while ((line = br.readLine()) != null) {
+                // Skip empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                // Split the line into columns
+                String[] columns = line.split(",", -1); // -1 ensures empty columns are preserved
+
+                // Check if the first column indicates a new section
+                if (columns[0].equalsIgnoreCase("Go up a level") ||
+                    columns[0].equalsIgnoreCase("Armor") ||
+                    columns[0].equalsIgnoreCase("Hand") ||
+                    columns[0].equalsIgnoreCase("Hands") ||
+                    columns[0].equalsIgnoreCase("Footgear") ||
+                    columns[0].equalsIgnoreCase("Mod")) {
+                    currentSection = columns[0];
+                    treasures.putIfAbsent(currentSection, new ArrayList<>());
+                }
+
+                // Add the row to the current section
+                if (currentSection != null) {
+                    treasures.get(currentSection).add(columns);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+        return treasures;
+    }
 
     //csv reader for the curse cards
 

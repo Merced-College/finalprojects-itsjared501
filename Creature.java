@@ -47,8 +47,18 @@ public class Creature {
     }
 
     public void addAttackPower(int power) {
-        this.attackPower += power;
-        System.out.println("Attack power increased by " + power + ". Total attack power: " + this.attackPower);
+        attackPower = level + power;
+        System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
+    }
+
+    //This method creates the inventory for the user, a linked list of treasure cards.
+    public void inventory() {
+
+    }
+
+    //This method creates the equipment for the user, a linked list of armor, hand, hands, and footgear cards.
+    public void equipment() {
+
     }
 
     public String getName() {
