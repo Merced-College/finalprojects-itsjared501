@@ -34,8 +34,8 @@ class Game {
                 try {
                     String type = columns[0].trim(); // Column 1: Section (e.g., "Armor")
                     String name = columns[1].trim();    // Column 2: Name (unique key)
-                    int attackPower = columns[2].trim().isEmpty() ? 0 : Integer.parseInt(columns[2].trim()); // Column 3: Attack power
-                    String description = columns.length > 3 ? columns[3].trim() : ""; // Column 4: Description (if present)
+                    int attackPower = Integer.parseInt(columns[2].trim()); // Column 3: Attack power
+                    String description = columns[3].trim(); // Column 4: Description (if present)
 
                     // Create a Treasure object
                     Treasure treasure = new Treasure(type, name, attackPower, description);
@@ -56,9 +56,6 @@ class Game {
 
     //csv reader for the monster cards into an arraylist
     
-
-    //csv reader for the curse cards
-
 
     //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
     public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
