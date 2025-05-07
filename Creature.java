@@ -32,6 +32,10 @@ public class Creature {
         else if (chosenClass.equalsIgnoreCase("wizard")) {
             userClass = "Wizard";
         }
+        else {
+            System.out.println("I believe you misheard me. Please select a class from the list above.");
+            setClass(chosenClass);
+        }
     }
 
     public void setRace (String chosenRace) {
@@ -41,8 +45,12 @@ public class Creature {
         else if (chosenRace.equalsIgnoreCase("elf")) {
             userRace = "Elven";
         } 
-        else if (chosenRace.equalsIgnoreCase("halffling")) {
+        else if (chosenRace.equalsIgnoreCase("halfling")) {
             userRace = "Halfling";
+        }
+        else {
+            System.out.println("I believe you misheard me. Please select a race from the list above.");
+            setRace(chosenRace);
         }
     }
 
@@ -122,7 +130,7 @@ public class Creature {
         System.out.println("                   Monsters with a level 10 or higher are -1 against you.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a class by entering the number of the class you want to select. "); //ask for int (class)
+        System.out.print("Select a class by entering the class you want to select. "); //ask for int (class)
         String classSelection = scanner.nextLine();
         setClass(classSelection); //this will be used to set the class of the user
     }
@@ -153,7 +161,7 @@ public class Creature {
         System.out.println("                         You are immune to the bad stuff of Monsters level 1-10.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a race by entering the number of the race you want to select. "); //ask for int (race)
+        System.out.print("Select a race by entering the race you want to select. "); //ask for int (race)
         String raceSelection = scanner.nextLine();
         setRace(raceSelection); //this will be used to set the race of the user
     }
