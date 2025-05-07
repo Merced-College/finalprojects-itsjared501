@@ -1,4 +1,5 @@
 //import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Creature {
@@ -9,11 +10,12 @@ public class Creature {
     private int level = 1;
     private int attackPower;
     //private boolean isAlive = true;
+
+    private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
     
     Scanner scanner = new Scanner(System.in);
     
-    //private ArrayList<Treasure> inventory = new ArrayList<Treasure>()[10];
-
+    //Constructor
     public Creature(String name) {
         this.name = name;
         //this.userGender = userGender;
@@ -59,9 +61,20 @@ public class Creature {
         System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
     }
 
-    //This method creates the inventory for the user, a linked list of treasure cards.
-    public void inventory() {
+    //This method adds treasures gained from the fight to the user's inventory.
+    public void addToInventory(Treasure newItem) {
+        
+        inventory.add(newItem);
 
+        //put a cap on the inventory size
+    }
+
+    //This method creates the inventory for the user, a linked list of treasure cards.
+    public void accessInventory() {
+        //for loop to display all the items in the inventory
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println(inventory.get(i).toString());
+        }
     }
 
     //This method creates the equipment for the user, a linked list of armor, hand, hands, and footgear cards.
