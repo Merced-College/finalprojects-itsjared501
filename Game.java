@@ -9,14 +9,19 @@ import java.io.IOException;
 //import java.util.List;
 //import java.util.Map;
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.HashMap;
+//import java.util.LinkedList;
+import java.util.Map;
+import java.util.Random;
 
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
 
+    private static Map<String, Treasure> treasureMap = new HashMap<>(); //this will be used to create a hashmap of the treasure cards
+    
     //csv reader for the treasure cards, method that reads the treasure from the csv file and creates a hashmap of the treasure cards
-     public static LinkedList<Treasure> readTreasureCardsToLinkedList(String filePath) {
-        LinkedList<Treasure> treasures = new LinkedList<>();
+    public static Map<String, Treasure> readTreasureCards(String filePath) {
+        Map<String, Treasure> treasureMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -32,16 +37,16 @@ class Game {
 
                 // Parse the treasure details
                 try {
-                    String type = columns[0].trim(); // Column 1: Section (e.g., "Armor")
+                    String section = columns[0].trim(); // Column 1: Section (e.g., "Armor")
                     String name = columns[1].trim();    // Column 2: Name (unique key)
-                    int attackPower = Integer.parseInt(columns[2].trim()); // Column 3: Attack power
-                    String description = columns[3].trim(); // Column 4: Description (if present)
+                    int attackPower = columns[2].trim().isEmpty() ? 0 : Integer.parseInt(columns[2].trim()); // Column 3: Attack power
+                    String description = columns.length > 3 ? columns[3].trim() : ""; // Column 4: Description (if present)
 
                     // Create a Treasure object
-                    Treasure treasure = new Treasure(type, name, attackPower, description);
+                    Treasure treasure = new Treasure(section, name, attackPower, description);
 
-                    // Add the Treasure object to the LinkedList
-                    treasures.add(treasure);
+                    // Add the Treasure object to the HashMap with the name as the key
+                    treasureMap.put(name, treasure);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     System.err.println("Invalid line format: " + line);
                 }
@@ -50,9 +55,36 @@ class Game {
             System.err.println("Error reading the file: " + e.getMessage());
         }
 
-        return treasures;
+        return treasureMap;
     }
-    
+
+    public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
+        if (treasureMap.isEmpty()) {
+            System.out.println("The treasure map is empty!");
+            return null;
+        }
+
+        // Get a random key from the HashMap
+        Object[] keys = treasureMap.keySet().toArray();
+        Random random = new Random();
+        String randomKey = (String) keys[random.nextInt(keys.length)];
+
+        // Get the Treasure object associated with the random key
+        Treasure selectedTreasure = treasureMap.get(randomKey);
+
+        // Remove the selected Treasure from the HashMap
+        treasureMap.remove(randomKey);
+
+        // Return the selected Treasure
+        return selectedTreasure;
+    }
+
+    public static void newTreasure() {
+        Treasure randomTreasure = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+        if (randomTreasure != null) {
+            System.out.println("New Item: " + randomTreasure); //this will be used to display the random treasure card that was drawn        }
+        }
+    }
 
     //csv reader for the monster cards into an arraylist
     
@@ -69,9 +101,6 @@ class Game {
         System.out.println("To start off your journey, tell me about yourself!");
         System.out.print("What is your name? ");
         String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
-
-        /*S ystem.out.print("What is your gender? Male/Female: "); //male or female have their own advantages and disadvantages in combat regarding certain monsters.
-        String gender = scanner.nextLine(); //this will be used to create the user object of the class Creature */
 
         Creature user = new Creature(name); //uses the constructor to create the user object and set their name and gender
 
@@ -118,9 +147,10 @@ class Game {
 
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
-        gameIntro(); //call gameIntro method to start the game
+        treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
 
-        //Map<String, List<String[]>> treasures = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
+        //gameIntro(); //call gameIntro method to start the game
+        newTreasure();
 
         //do while loop to keep the game going until the user is level 10 or is dead
     }

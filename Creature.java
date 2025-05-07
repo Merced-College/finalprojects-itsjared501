@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Creature {
     private String name;
-    //private String userGender;
     private String userClass;
     private String userRace;
     private int level = 1;
@@ -86,10 +85,6 @@ public class Creature {
     public String getName() {
         return name;
     }
-
-    /* public String getUserGender() {
-        return userGender;
-    } */
 
     public String getUserClass() {
         return userClass;
