@@ -19,29 +19,29 @@ public class Creature {
         this.userGender = userGender;
     }
 
-    public void setClass (int chosenClass) {
-        if (chosenClass == 1) {
+    public void setClass (String chosenClass) {
+        if (chosenClass.equalsIgnoreCase("cleric")) {
             userClass = "Cleric";
         } 
-        else if (chosenClass == 2) {
+        else if (chosenClass.equalsIgnoreCase("thief")) {
             userClass = "Thief";
         } 
-        else if (chosenClass == 3) {
+        else if (chosenClass.equalsIgnoreCase("warrior")) {
             userClass = "Warrior";
         } 
-        else if (chosenClass == 4) {
+        else if (chosenClass.equalsIgnoreCase("wizard")) {
             userClass = "Wizard";
         }
     }
 
-    public void setRace (int chosenRace) {
-        if (chosenRace == 1) {
+    public void setRace (String chosenRace) {
+        if (chosenRace.equalsIgnoreCase("dwarf")) {
             userRace = "Dwarf";
         } 
-        else if (chosenRace == 2) {
+        else if (chosenRace.equalsIgnoreCase("elf")) {
             userRace = "Elven";
         } 
-        else if (chosenRace == 3) {
+        else if (chosenRace.equalsIgnoreCase("halffling")) {
             userRace = "Halfling";
         }
     }
@@ -119,11 +119,11 @@ public class Creature {
         System.out.println("               While in combat, you may discard your entire inventory to automatically beat the monster. You obtain");
         System.out.println("               all treasures but do not level up.");
         System.out.println("Arcane Immunity:   Those sleepless nights studying Defense Against the Dark Arts have paid off.");
-        System.out.println("                   You are immune to curses.");
+        System.out.println("                   Monsters with a level 10 or higher are -1 against you.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
         System.out.print("Select a class by entering the number of the class you want to select. "); //ask for int (class)
-        int classSelection = scanner.nextInt();
+        String classSelection = scanner.nextLine();
         setClass(classSelection); //this will be used to set the class of the user
     }
 
@@ -154,7 +154,7 @@ public class Creature {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
         System.out.print("Select a race by entering the number of the race you want to select. "); //ask for int (race)
-        int raceSelection = scanner.nextInt();
+        String raceSelection = scanner.nextLine();
         setRace(raceSelection); //this will be used to set the race of the user
     }
 }
