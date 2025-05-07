@@ -21,7 +21,6 @@ class Game {
     
     //csv reader for the treasure cards, method that reads the treasure from the csv file and creates a hashmap of the treasure cards
     public static Map<String, Treasure> readTreasureCards(String filePath) {
-        Map<String, Treasure> treasureMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
