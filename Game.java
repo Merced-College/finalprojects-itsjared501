@@ -70,10 +70,10 @@ class Game {
         System.out.print("What is your name? ");
         String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
 
-        System.out.print("What is your gender? Male/Female: "); //male or female have their own advantages and disadvantages in combat regarding certain monsters.
-        String gender = scanner.nextLine(); //this will be used to create the user object of the class Creature
+        /*S ystem.out.print("What is your gender? Male/Female: "); //male or female have their own advantages and disadvantages in combat regarding certain monsters.
+        String gender = scanner.nextLine(); //this will be used to create the user object of the class Creature */
 
-        Creature user = new Creature(name, gender); //uses the constructor to create the user object and set their name and gender
+        Creature user = new Creature(name); //uses the constructor to create the user object and set their name and gender
 
         //bring up the selectName method to allow the user to select one
         System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");

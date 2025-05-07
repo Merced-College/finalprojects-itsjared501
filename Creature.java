@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Creature {
     private String name;
-    private String userGender;
+    //private String userGender;
     private String userClass;
     private String userRace;
     private int level = 1;
@@ -14,9 +14,9 @@ public class Creature {
     
     //private ArrayList<Treasure> inventory = new ArrayList<Treasure>()[10];
 
-    public Creature(String name, String userGender) {
+    public Creature(String name) {
         this.name = name;
-        this.userGender = userGender;
+        //this.userGender = userGender;
     }
 
     public void setClass (String chosenClass) {
@@ -69,13 +69,14 @@ public class Creature {
 
     }
 
+    //The getters
     public String getName() {
         return name;
     }
 
-    public String getUserGender() {
+    /* public String getUserGender() {
         return userGender;
-    }
+    } */
 
     public String getUserClass() {
         return userClass;
