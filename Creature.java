@@ -35,7 +35,7 @@ public class Creature {
         }
         else {
             System.out.println("I believe you misheard me. Please select a class from the list above.");
-            setClass(chosenClass);
+            selectClass();
         }
     }
 
@@ -51,7 +51,7 @@ public class Creature {
         }
         else {
             System.out.println("I believe you misheard me. Please select a race from the list above.");
-            setRace(chosenRace);
+            selectRace();
         }
     }
 

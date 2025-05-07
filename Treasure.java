@@ -33,7 +33,7 @@ public class Treasure {
 
     @Override
     public String toString() {
-        return name + " (" + type + "): " + description;
+        return name + " (" + type + ") \n" + description;
     }
 
     // Method to pull a treasure item from the user's inventory and apply its attack power to the user

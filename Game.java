@@ -149,8 +149,7 @@ class Game {
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
 
-        //gameIntro(); //call gameIntro method to start the game
-        newTreasure();
+        gameIntro(); //call gameIntro method to start the game
 
         //do while loop to keep the game going until the user is level 10 or is dead
     }
