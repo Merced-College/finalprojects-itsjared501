@@ -18,7 +18,8 @@ import java.util.Random;
 class Game {
 
     private static Map<String, Treasure> treasureMap = new HashMap<>(); //this will be used to create a hashmap of the treasure cards
-    
+    private static Map<String, Monster> monsterMap = new HashMap<>(); //this will be used to create a hashmap of the monster cards
+
     //csv reader for the treasure cards, method that reads the treasure from the csv file and creates a hashmap of the treasure cards
     public static Map<String, Treasure> readTreasureCards(String filePath) {
 
@@ -38,8 +39,8 @@ class Game {
                 try {
                     String section = columns[0].trim(); // Column 1: Section (e.g., "Armor")
                     String name = columns[1].trim();    // Column 2: Name (unique key)
-                    int attackPower = columns[2].trim().isEmpty() ? 0 : Integer.parseInt(columns[2].trim()); // Column 3: Attack power
-                    String description = columns.length > 3 ? columns[3].trim() : ""; // Column 4: Description (if present)
+                    int attackPower = Integer.parseInt(columns[2].trim()); // Column 3: Attack power
+                    String description = columns[3].trim(); // Column 4: Description (if present)
 
                     // Create a Treasure object
                     Treasure treasure = new Treasure(section, name, attackPower, description);
@@ -56,6 +57,44 @@ class Game {
 
         return treasureMap;
     }
+
+    //csv reader for the monster cards into a hashmap
+    public static Map<String, Monster> readMonsterCards(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                // Skip empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                // Split the line into columns
+                String[] columns = line.split(",", -1); // -1 ensures empty columns are preserved
+
+                // Parse the monster details
+                try {
+                    int level = Integer.parseInt(columns[0].trim()); // Column 2: Level
+                    String name = columns[1].trim();    // Column 1: Name (unique key)
+                    String description = columns[2].trim(); // Column 3: Description
+                    String badStuff = columns[3].trim(); // Column 4: Bad Stuff (if present)
+
+                    // Create a Monster object
+                    Monster monster = new Monster(name, level, description, badStuff);
+
+                    // Add the Monster object to the HashMap with the name as the key
+                    monsterMap.put(name, monster);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Invalid line format: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+
+        return monsterMap;
+    }
+
 
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
         if (treasureMap.isEmpty()) {
@@ -78,15 +117,40 @@ class Game {
         return selectedTreasure;
     }
 
+    public static Monster getRandomMonster(Map<String, Monster> monsterMap) {
+        if (monsterMap.isEmpty()) {
+            System.out.println("The monster map is empty!");
+            return null;
+        } 
+
+        // Get a random key from the HashMap
+        Object[] keys = monsterMap.keySet().toArray();
+        Random random = new Random();
+        String randomKey = (String) keys[random.nextInt(keys.length)];
+
+        // Get the Monster object associated with the random key
+        Monster selectedMonster = monsterMap.get(randomKey);
+
+        // Remove the selected Monster from the HashMap
+        monsterMap.remove(randomKey);
+
+        // Return the selected Monster
+        return selectedMonster;
+    }
+
     public static void newTreasure() {
         Treasure randomTreasure = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
         if (randomTreasure != null) {
             System.out.println("New Item: " + randomTreasure); //this will be used to display the random treasure card that was drawn        }
         }
-    }
+    }    
 
-    //csv reader for the monster cards into an arraylist
-    
+    public static void newMonster() {
+        Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
+        if (randomMonster != null) {
+            System.out.println(randomMonster); //this will be used to display the random monster card that was drawn
+        }
+    }
 
     //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
     public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
@@ -147,9 +211,10 @@ class Game {
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
-
-        gameIntro(); //call gameIntro method to start the game
-
+        monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
+        
+        //gameIntro(); //call gameIntro method to start the game
+        
         //do while loop to keep the game going until the user is level 10 or is dead
     }
 }

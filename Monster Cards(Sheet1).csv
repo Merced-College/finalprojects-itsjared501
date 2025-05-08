@@ -1,38 +1,37 @@
-1,Crabs,"A bunch of crabs appear to nip at you with their sharp pincers!",Lose an item.,,,
-1,Lame Goblin,"So...this dude kinda sucks.",Lose an item.,,,
-1,Drooling Slime,"Yucky slime! Hurry, defeat it before it drools all over you!",Lose an item.,,,
-1,Maul Rat,"A vermin from Hell. And it has a giant hammer?!",Lose an item.,,,
-1,Potted Plant,"This is literally a give me. Do you really want to lose to a potted plant?",Lose an item.,,,
-2,Flying Frogs,"Since when could frogs fly?!",Lose a level.,,,
-2,Mr. Bones,"It's just you and Mr.Bones. What kind of misery is this?",Lose a level.,,,
-2,Pit Bull,"Wow. So you're really going to beat up a dog? Some hero you are.",Lose a level.,,,
-2,Gelatinous Octahedron,"Jello and numbers? It reminds you of the those miserable nights studying for class.",Lose a level.,,,
-2,Large Angry Chicken,"For some reason the work Jockey comes to mind...",Lose a level.,,,
-4,Leperchaun,"His grubby little hands frighten you.",Lose a level.,,,
-4,Harpies,"Harps with wings descend upon you. Luring you in with their nostalgic sounds.",Lose a level.,,,
-4,Undead Horse,"A sad horse walking with his head down (literally) in sadness. Might as well kill it.",Lose a level.,,,
-4,Snails on Speed,"A speedy snail with a shell sharp as a theifs freshly sharpened daggers.",Lose a level.,,,
-6,Pukachu,"Its mouth dribbles with puke as it repeatedly says Puka Puka!",Lose 2 levels.,,,
-6,Lawyers,"Oh no. What kind of legal trouble did you get into this time?",Lose 2 levels.,,,
-6,Platycore,"A weird hybrid between a platypus and a manitcore named...Perry?",Lose 2 levels.,,,
-6,Shrieking Geek,"The room is just occupied by some dude that wont shut up.",Lose 2 levels.,,,
-8,Amazon,"A fierce female warrior weilding a glowing lasso!",Lose 2 levels.,,,
-8,Face Sucker,"A slimy creature that keeps lunging toward your face!",Lose 2 levels.,,,
-8,Gazebo,"A gazebo sits alone in the room. Pure stone, yet you feel its gaze...",Lose 2 levels.,,,
-8,Ghoulfiends,"Ha! I bet you wish had a ghoulfriend you loser.",Lose 2 levels.,,,
-10,"3,872 Orcs","Wow um. Good luck?",Lose 2 levels and 2 items.,,,
-10,Floating Nose,"The nose immediately snaps towards your direction due to your stench!",Lose 2 levels and 2 items.,,,
-10,Net Troll,"He has no special powers, but he just really hates you.",Lose 2 levels and 2 items.,,,
-12,Bigfoot,"A foot bigger than the biggest foot of Footfeetbigger Land!",Lose 2 levels and 2 items.,,,
-12,Wannabe Vampire,"A vampire with fangs so tiny he can't bite anything.",Lose 2 levels and 2 items.,,,
-12,Tongue Demon,"GET THAT TONGUE AWAY FROM ME WEIRDO!",Lose 2 levels and 2 items.,,,
-14,Insurance Salesman,"This man wont shut up about the amazing health coverage his agency offers.",Lose 2 levels and 2 items.,,,
-14,Stoned Golem,"This stone golem looks a little...stoned?",Lose 2 levels and 2 items.,,,
-14,Unspeakably Awful Indescribable Horror,"You open the door to an pitch black room. Several tentacles come at you, pulling you in!",Lose 2 levels and 2 items.,,,
-16,Hippogriff,"Will not pursue anyone of Level 3 or below. Otherwise, it lunges at you with a piercing scream!",You are dead.,,,
-16,Wight Brothers,"Will not pursue anyone of Level 3 or below. Otherwise, they launch towards you in their impressive aircraft!",You are dead.,,,
-16,King Tut,"Will not pursue anyone of Level 3 or below. Otherwise, face the judgement of his highness,",You are dead.,,,
-18,Squidzilla,"Will not pursue anyone of Level 4 or below. Otherwise, its girthy tentacles detain you. Break free!",You are dead.,,,
-18,Hades,"Will not pursue anyone of Level 4 or below. Otherwise, fight for your life. Or live as a shadow in his underworld.",You are dead.,,,
-20,Plutonium Dragon,"Will not pursue anyone of Level 5 or below. Otherwise, fight for glory, wealth, and well...to stay alive!",You are dead.,,,
-
+1,Crabs,A bunch of crabs appear to nip at you with their sharp pincers!,Lose an item.
+1,Lame Goblin,So...this dude kinda sucks.,Lose an item.
+1,Drooling Slime,Yucky slime! Hurry defeat it before it drools all over you!,Lose an item.
+1,Maul Rat,A vermin from Hell. And it has a giant hammer?!,Lose an item.
+1,Potted Plant,This is literally a give me. Do you really want to lose to a potted plant?,Lose an item.
+2,Flying Frogs,Since when could frogs fly?!,Lose a level.
+2,Mr. Bones,It's just you and Mr.Bones. What kind of misery is this?,Lose a level.
+2,Pit Bull,Wow. So you're really going to beat up a dog? Some hero you are.,Lose a level.
+2,Gelatinous Octahedron,Jello and numbers? It reminds you of those miserable nights studying for class.,Lose a level.
+2,Large Angry Chicken,For some reason the word Jockey comes to mind...,Lose a level.
+4,Leperchaun,His grubby little hands frighten you.,Lose a level.
+4,Harpies,Harps with wings descend upon you. Luring you in with their nostalgic sounds.,Lose a level.
+4,Undead Horse,A sad horse walking with his head down (literally) in sadness. Might as well kill it.,Lose a level.
+4,Snails on Speed,A speedy snail with a shell sharp as a thief's freshly sharpened daggers.,Lose a level.
+6,Pukachu,Its mouth dribbles with puke as it repeatedly says Puka Puka!,Lose 2 levels.
+6,Lawyers,Oh no. What kind of legal trouble did you get into this time?,Lose 2 levels.
+6,Platycore,A weird hybrid between a platypus and a manticore named...Perry?,Lose 2 levels.
+6,Shrieking Geek,The room is just occupied by some dude that won't shut up.,Lose 2 levels.
+8,Amazon,A fierce female warrior wielding a glowing lasso!,Lose 2 levels.
+8,Face Sucker,A slimy creature that keeps lunging toward your face!,Lose 2 levels.
+8,Gazebo,A gazebo sits alone in the room. Pure stone yet you feel its gaze...,Lose 2 levels.
+8,Ghoulfiends,Ha! I bet you wish you had a ghoulfriend you loser.,Lose 2 levels.
+10,3872 Orcs,Wow um. Good luck?,Lose 2 levels and 2 items.
+10,Floating Nose,The nose immediately snaps towards your direction due to your stench!,Lose 2 levels and 2 items.
+10,Net Troll,He has no special powers but he just really hates you.,Lose 2 levels and 2 items.
+12,Bigfoot,A foot bigger than the biggest foot of Footfeetbigger Land!,Lose 2 levels and 2 items.
+12,Wannabe Vampire,A vampire with fangs so tiny he can't bite anything.,Lose 2 levels and 2 items.
+12,Tongue Demon,GET THAT TONGUE AWAY FROM ME WEIRDO!,Lose 2 levels and 2 items.
+14,Insurance Salesman,This man won't shut up about the amazing health coverage his agency offers.,Lose 2 levels and 2 items.
+14,Stoned Golem,This stone golem looks a little...stoned?,Lose 2 levels and 2 items.
+14,Unspeakably Awful Indescribable Horror,You open the door to a pitch black room. Several tentacles come at you pulling you in!,Lose 2 levels and 2 items.
+16,Hippogriff,Will not pursue anyone of Level 3 or below. Otherwise it lunges at you with a piercing scream!,You are dead.
+16,Wight Brothers,Will not pursue anyone of Level 3 or below. Otherwise they launch towards you in their impressive aircraft!,You are dead.
+16,King Tut,Will not pursue anyone of Level 3 or below. Otherwise face the judgement of his highness.,You are dead.
+18,Squidzilla,Will not pursue anyone of Level 4 or below. Otherwise its girthy tentacles detain you. Break free!,You are dead.
+18,Hades,Will not pursue anyone of Level 4 or below. Otherwise fight for your life. Or live as a shadow in his underworld.,You are dead.
+20,Plutonium Dragon,Will not pursue anyone of Level 5 or below. Otherwise fight for glory! The wealth! And well...to stay alive!,You are dead.
