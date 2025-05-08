@@ -19,6 +19,7 @@ class Game {
 
     private static Map<String, Treasure> treasureMap = new HashMap<>(); //this will be used to create a hashmap of the treasure cards
     private static Map<String, Monster> monsterMap = new HashMap<>(); //this will be used to create a hashmap of the monster cards
+    private static Creature user; //this will be used to create the user object of the class Creature
 
     //csv reader for the treasure cards, method that reads the treasure from the csv file and creates a hashmap of the treasure cards
     public static Map<String, Treasure> readTreasureCards(String filePath) {
@@ -165,7 +166,7 @@ class Game {
         System.out.print("What is your name? ");
         String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
 
-        Creature user = new Creature(name); //uses the constructor to create the user object and set their name and gender
+        user = new Creature(name); //uses the constructor to create the user object and set their name and gender
 
         //bring up the selectName method to allow the user to select one
         System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");
@@ -216,5 +217,10 @@ class Game {
         //gameIntro(); //call gameIntro method to start the game
         
         //do while loop to keep the game going until the user is level 10 or is dead
-    }
+        /* do {
+
+        }
+        while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
+        */
+        }
 }

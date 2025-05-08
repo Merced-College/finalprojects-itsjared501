@@ -8,11 +8,12 @@ public class Creature {
     private String userRace;
     private int level = 1;
     private int attackPower;
-    //private boolean isAlive = true;
+    private boolean isAlive = true;
 
     private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
     
     Scanner scanner = new Scanner(System.in);
+    
     
     //Constructor
     public Creature(String name) {
@@ -100,6 +101,10 @@ public class Creature {
 
     public int getAttackPower() {
         return attackPower;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     /*public ArrayList<Treasure> getInventory() {
