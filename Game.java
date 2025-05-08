@@ -195,15 +195,48 @@ class Game {
     }
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
+    public static void userChoose() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What would you like to do?\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
+        int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
+        switch (choice) {
+            case 1:
+                user.getInventory(); //this will be used to call the method to check the inventory
+                break;
+            case 2:
+                user.getEquipment(); //this will be used to call the method to check the equipment
+                break;
+            case 3:
+                //combat method (not yet implemented)
+                break;
+            default:
+                System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
+                userChoose(); //this will be used to call the method again if the user inputs an invalid choice
+        }
+        scanner.close();
+    }
+
+
+    //This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
+    public static boolean runAway() {
+        Random random = new Random();
+        //generate a die roll from 1-6
+        int roll = random.nextInt(6)+1; //this will be used to roll a die 1-6
+        //the player needs to roll a 4 or higher to successfully run away from the monster
+        if (roll < 4) { 
+            System.out.println("You failed to run away from the monster!");
+            return false; //this will be used to return true if the user fails
+        } else {
+            System.out.println("You have successfully ran away from the monster!");
+            return true; //this will be used to return false if the user succeeds
+        }
+    }
 
 
     //This method serves as the combat loop, where the user will be able to fight monsters and gain loot.
 
 
-    //kickDownDoor method (draw a door card, either a monster or a curse)
-
-
-    //lootOrLook method (if a curse was drawn, the user can either loot the room or look for a monster)
+    //kickDownDoor method (draw a monster card)
 
 
     //treasureLoot method (gives loot after defeating a monster or looting the room)
@@ -213,12 +246,11 @@ class Game {
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
-        
         //gameIntro(); //call gameIntro method to start the game
         
         //do while loop to keep the game going until the user is level 10 or is dead
         /* do {
-
+            userChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
         */

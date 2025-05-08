@@ -11,6 +11,10 @@ public class Monster {
         this.badStuff = badStuff;
     }
 
+    public void badStuffOccurs() {
+        // if-else logic to determine which bad stuff occurs
+    }
+
     public String getName() {
         return name;
     }
@@ -29,6 +33,6 @@ public class Monster {
 
     @Override
     public String toString() {
-        return "Level " + level + " - " + name + "\n" + description;
+        return "Level " + level + " - " + name + "\n" + description + "\n" + "Bad Stuff: " + badStuff;
     }
 }

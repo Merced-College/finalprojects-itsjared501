@@ -1,4 +1,3 @@
-//import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -11,6 +10,7 @@ public class Creature {
     private boolean isAlive = true;
 
     private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
+    private LinkedList<Treasure> equipment = new LinkedList<Treasure>();
     
     Scanner scanner = new Scanner(System.in);
     
@@ -63,10 +63,22 @@ public class Creature {
 
     //This method adds treasures gained from the fight to the user's inventory.
     public void addToInventory(Treasure newItem) {
-        
-        inventory.add(newItem);
+        if (inventory.size() >= 10) {
+            System.out.println("Inventory is full. Cannot add more items.");
+            return;
+        }
+        else {
+            inventory.add(newItem);
+        }
+    }
 
-        //put a cap on the inventory size
+    //This method removes treasures from the user's inventory.
+    public void removeFromInventory(Treasure item) {
+        if (inventory.contains(item)) {
+            inventory.remove(item);
+        } else {
+            System.out.println("Item not found in inventory.");
+        }
     }
 
     //This method creates the inventory for the user, a linked list of treasure cards.
@@ -77,8 +89,28 @@ public class Creature {
         }
     }
 
-    //This method creates the equipment for the user, a linked list of armor, hand, hands, and footgear cards.
-    public void equipment() {
+    //This method equips armor, hand, hands, and footgear cards to the user.
+    public void equip(Treasure item) {
+        if (item.getType().equalsIgnoreCase("armor")) {
+            //add armor to the user
+            equipment.add(item);
+        } else if (item.getType().equalsIgnoreCase("hand")) {
+            //add hand to the user
+            equipment.add(item);
+        } else if (item.getType().equalsIgnoreCase("hands")) {
+            //add hands to the user
+            equipment.add(item);
+        } else if (item.getType().equalsIgnoreCase("footgear")) {
+            //add footgear to the user
+            equipment.add(item);
+        } else {
+            System.out.println("This item cannot be equipped.");
+        }
+        removeFromInventory(item);
+    }
+
+    //This method will check to see if the item is equippable; only one armor, one hand, two hands, and one footgear are allowed.
+    public void equipability(Treasure item) {
 
     }
 
@@ -107,9 +139,15 @@ public class Creature {
         return isAlive;
     }
 
-    /*public ArrayList<Treasure> getInventory() {
+    //This method returns the user's inventory.
+    public LinkedList<Treasure> getInventory() {
         return inventory;
-    }*/
+    }
+
+    //This method returns the user's equipment.
+    public LinkedList<Treasure> getEquipment() {
+        return equipment;
+    }
 
     public void selectClass() {
         //display all classes and their passives
