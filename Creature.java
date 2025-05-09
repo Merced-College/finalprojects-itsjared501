@@ -98,8 +98,13 @@ public class Creature {
 
     //This method increases the user's level when they defeat a monster.
     public void levelUp(Monster monster) {
-        level++;
-        System.out.println("You have leveled up! You are now level " + level + ".");
+        if (monster.getLevel() >= 14) {
+            level += 2;;
+            System.out.println("You are now level " + level + "!");
+        } else {
+            level++;
+            System.out.println("You are now level " + level + "!");
+        }
     }
 
     public void addAttackPower(int power) {

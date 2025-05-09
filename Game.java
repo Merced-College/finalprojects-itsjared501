@@ -180,11 +180,6 @@ class Game {
     }
 
     public static void newTreasure(Monster monster) {
-        /*Treasure item = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
-        if (item != null) {
-            System.out.println("New Item: " + item); //this will be used to display the random treasure card that was drawn
-            user.addToInventory(item); //this will be used to add the item to the user's inventory
-        }*/
         if (monster.getLevel() >= 14) {
             Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (item1 != null) {
@@ -286,7 +281,6 @@ class Game {
     //defeatedMonster method (gives loot after defeating a monster or looting the room)
     public static void defeatedMonster(Monster monster) {
         //this will be used to give loot after defeating a monster or looting the room
-        System.out.println("You have defeated the monster! You gain 1 level and 1 treasure card!");
         user.levelUp(monster); //this will be used to level up the user
         newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
     }
