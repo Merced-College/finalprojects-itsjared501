@@ -21,6 +21,46 @@ public class Creature {
         //this.userGender = userGender;
     }
 
+    //The getters
+    public String getName() {
+        return name;
+    }
+
+    public String getUserClass() {
+        return userClass;
+    }
+
+    public String getUserRace() {
+        return userRace;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    //This method accesses the user's inventory and displays all the items in it.
+    public void accessInventory() {
+        //for loop to display all the items in the inventory
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println(inventory.get(i).toString());
+        }
+    }
+
+    public void accessEquipment() {
+        //for loop to display all the items in the equipment
+        for (int i = 0; i < equipment.size(); i++) {
+            System.out.println(equipment.get(i).toString());
+        }
+    }
+
     public void setClass (String chosenClass) {
         if (chosenClass.equalsIgnoreCase("cleric")) {
             userClass = "Cleric";
@@ -56,6 +96,12 @@ public class Creature {
         }
     }
 
+    //This method increases the user's level when they defeat a monster.
+    public void levelUp(Monster monster) {
+        level++;
+        System.out.println("You have leveled up! You are now level " + level + ".");
+    }
+
     public void addAttackPower(int power) {
         attackPower = level + power;
         System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
@@ -81,72 +127,102 @@ public class Creature {
         }
     }
 
-    //This method creates the inventory for the user, a linked list of treasure cards.
-    public void accessInventory() {
-        //for loop to display all the items in the inventory
-        for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(inventory.get(i).toString());
+    public void useItem(Treasure item) {
+        //if the item is a potion, use it
+        if (item.getType().equalsIgnoreCase("item")) {
+            System.out.println("You have used " + item.getName() + ".");
+            addAttackPower(item.getAttackPower());
+            removeFromInventory(item);
+        } else {
+            System.out.println("This item cannot be used in combat.");
         }
     }
 
     //This method equips armor, hand, hands, and footgear cards to the user.
     public void equip(Treasure item) {
         if (item.getType().equalsIgnoreCase("armor")) {
-            //add armor to the user
-            equipment.add(item);
+            //add armor to the user if applicable
+             for (int i = 0; i < equipment.size(); i++) {
+                if (equipment.get(i).getType().equalsIgnoreCase("armor")) {
+                    System.out.println("You already have armor equipped. Would you like to replace it? (yes/no)");
+                    String response = scanner.nextLine();
+                    if (response.equalsIgnoreCase("yes")) {
+                        equipment.remove(i);
+                        equipment.add(item);
+                        removeFromInventory(item);
+                        System.out.println(item.getName() + "has been equipped.");
+                    } else {
+                        System.out.println("Armor not replaced.");
+                    }
+                }
+                else {
+                    equipment.add(item);
+                    removeFromInventory(item);
+                }
+            }
         } else if (item.getType().equalsIgnoreCase("hand")) {
             //add hand to the user
-            equipment.add(item);
-        } else if (item.getType().equalsIgnoreCase("hands")) {
+            for (int i = 0; i < equipment.size(); i++) {
+                if (equipment.get(i).getType().equalsIgnoreCase("hand") || equipment.get(i).getType().equalsIgnoreCase("two hands")) {
+                    System.out.println("You already have a hand equipped. Would you like to replace it? (yes/no)");
+                    String response = scanner.nextLine();
+                    if (response.equalsIgnoreCase("yes")) {
+                        equipment.remove(i);
+                        equipment.add(item);
+                        removeFromInventory(item);
+                        System.out.println(item.getName() + " has been equipped.");
+                    } else {
+                        System.out.println("Hand not replaced.");
+                    }
+                }
+                else {
+                    equipment.add(item);
+                    removeFromInventory(item);
+                }
+            }
+        } else if (item.getType().equalsIgnoreCase("two hands")) {
             //add hands to the user
-            equipment.add(item);
+            for (int i = 0; i < equipment.size(); i++) {
+                if (equipment.get(i).getType().equalsIgnoreCase("hand") || equipment.get(i).getType().equalsIgnoreCase("two hands")) {
+                    System.out.println("You already have a hand equipped. Would you like to replace it? (yes/no)");
+                    String response = scanner.nextLine();
+                    if (response.equalsIgnoreCase("yes")) {
+                        equipment.remove(i);
+                        equipment.add(item);
+                        removeFromInventory(item);
+                        System.out.println(item.getName() + " has been equipped.");
+                    } else {
+                        System.out.println("Hands not replaced.");
+                    }
+                }
+                else {
+                    equipment.add(item);
+                    removeFromInventory(item);
+                }
+            }
         } else if (item.getType().equalsIgnoreCase("footgear")) {
             //add footgear to the user
-            equipment.add(item);
+            for (int i = 0; i < equipment.size(); i++) {
+                if (equipment.get(i).getType().equalsIgnoreCase("footgear")) {
+                    System.out.println("You already have footgear equipped. Would you like to replace it? (yes/no)");
+                    String response = scanner.nextLine();
+                    if (response.equalsIgnoreCase("yes")) {
+                        equipment.remove(i);
+                        equipment.add(item);
+                        removeFromInventory(item);
+                        System.out.println(item.getName() + " has been equipped.");
+                    } else {
+                        System.out.println("Footgear not replaced.");
+                    }
+                }
+                else {
+                    equipment.add(item);
+                    removeFromInventory(item);
+                }
+            }
         } else {
             System.out.println("This item cannot be equipped.");
         }
-        removeFromInventory(item);
-    }
-
-    //This method will check to see if the item is equippable; only one armor, one hand, two hands, and one footgear are allowed.
-    public void equipability(Treasure item) {
-
-    }
-
-    //The getters
-    public String getName() {
-        return name;
-    }
-
-    public String getUserClass() {
-        return userClass;
-    }
-
-    public String getUserRace() {
-        return userRace;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getAttackPower() {
-        return attackPower;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    //This method returns the user's inventory.
-    public LinkedList<Treasure> getInventory() {
-        return inventory;
-    }
-
-    //This method returns the user's equipment.
-    public LinkedList<Treasure> getEquipment() {
-        return equipment;
     }
 
     public void selectClass() {

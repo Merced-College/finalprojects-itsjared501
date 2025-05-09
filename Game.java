@@ -96,6 +96,46 @@ class Game {
         return monsterMap;
     }
 
+    //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
+    public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
+        Scanner scanner = new Scanner(System.in);
+
+        //Introduce the user to the game and ask for their information.
+        System.out.println("(It is recommended you read the README file before playing this game.)"); //this will help ensure that the user has read over the rules of the game and understands how it works
+        System.out.println(" "); //this will be used to create a space between the two lines
+        System.out.println("Welcome to the epicness that is Munchkin! The game of pure uniqueness and chance, probability, and...yeah. You get the point."); //just a fun little intro to the game
+        Thread.sleep(4000);//this will be used to pause the program for 3 seconds, allowing the user to read the previous text
+        System.out.println("To start off your journey, tell me about yourself!");
+        System.out.print("What is your name? ");
+        String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
+
+        user = new Creature(name); //uses the constructor to create the user object and set their name and gender
+
+        //bring up the selectName method to allow the user to select one
+        System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");
+        Thread.sleep(4000); //this will be used to pause the program for 4 seconds, allowing the user to read the previous text
+        user.selectClass(); //the method is called to select the class of the user
+
+        //bring up the selectRace method to allow the user to select one
+        System.out.println("I see I see... how interesting. Lastly what race are you? (I know, sensitive topic, but I need to know.)");
+        Thread.sleep(4000); //this will be used to pause the program for 4 seconds, allowing the user to read the previous text
+        user.selectRace(); //the method is called to select the race of the user
+
+        //finalize the user name, race, and class
+        System.out.println("Fascinating! Well it's nice to meet you, " + user.getName() + " the " + user.getUserRace() + " " + user.getUserClass() + "!");
+        Thread.sleep(2000); //this will be used to pause the program for 2 seconds, allowing the user to read the previous text
+        System.out.print("Now, are you ready to begin your journey into the unknown oh faithful " + user.getUserClass() + "? Y/N: ");
+        String ready = scanner.nextLine(); //this will be used to get the user input of whether they are ready or not
+        if (ready.equalsIgnoreCase("Y")) {
+            //method to begin the game
+        }
+        else if (ready.equalsIgnoreCase("N")) {
+            System.out.println("Well that's too bad. You're already here, so here's the damn game.");
+            //method to begin the game
+        }
+
+        scanner.close();
+    }
 
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
         if (treasureMap.isEmpty()) {
@@ -139,10 +179,33 @@ class Game {
         return selectedMonster;
     }
 
-    public static void newTreasure() {
-        Treasure randomTreasure = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
-        if (randomTreasure != null) {
-            System.out.println("New Item: " + randomTreasure); //this will be used to display the random treasure card that was drawn        }
+    public static void newTreasure(Monster monster) {
+        /*Treasure item = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+        if (item != null) {
+            System.out.println("New Item: " + item); //this will be used to display the random treasure card that was drawn
+            user.addToInventory(item); //this will be used to add the item to the user's inventory
+        }*/
+        if (monster.getLevel() >= 14) {
+            Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+            if (item1 != null) {
+                System.out.println("New Item: " + item1); //this will be used to display the random treasure card that was drawn
+                user.addToInventory(item1); //this will be used to add the item to the user's inventory
+                treasureMap.remove(item1.getName());
+            }
+            Treasure item2 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+            if (item2 != null) {
+                System.out.println("New Item: " + item2); //this will be used to display the random treasure card that was drawn
+                user.addToInventory(item2); //this will be used to add the item to the user's inventory
+                treasureMap.remove(item2.getName());
+            }
+        }
+        else {
+            Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+            if (item1 != null) {
+                System.out.println("New Item: " + item1); //this will be used to display the random treasure card that was drawn
+                user.addToInventory(item1); //this will be used to add the item to the user's inventory
+                treasureMap.remove(item1.getName());
+            }   
         }
     }    
 
@@ -153,65 +216,46 @@ class Game {
         }
     }
 
-    //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
-    public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
-        Scanner scanner = new Scanner(System.in);
-
-        //Introduce the user to the game and ask for their information.
-        System.out.println("(It is recommended you read the README file before playing this game.)"); //this will help ensure that the user has read over the rules of the game and understands how it works
-        System.out.println(" "); //this will be used to create a space between the two lines
-        System.out.println("Welcome to the epicness that is Munchkin! The game of pure uniqueness and chance, probability, and...yeah. You get the point."); //just a fun little intro to the game
-        Thread.sleep(4000);//this will be used to pause the program for 3 seconds, allowing the user to read the previous text
-        System.out.println("To start off your journey, tell me about yourself!");
-        System.out.print("What is your name? ");
-        String name = scanner.nextLine(); //this will be used to create the user object of the class Creature
-
-        user = new Creature(name); //uses the constructor to create the user object and set their name and gender
-
-        //bring up the selectName method to allow the user to select one
-        System.out.println("Wow, " + user.getName() + "! What an eh name... It's no Godfrey the Slayer of Fae! Or Beyonce the Queen Bee! Now, what class are you?");
-        Thread.sleep(4000); //this will be used to pause the program for 4 seconds, allowing the user to read the previous text
-        user.selectClass(); //the method is called to select the class of the user
-
-        //bring up the selectRace method to allow the user to select one
-        System.out.println("I see I see... how interesting. Lastly what race are you? (I know, sensitive topic, but I need to know.)");
-        Thread.sleep(4000); //this will be used to pause the program for 4 seconds, allowing the user to read the previous text
-        user.selectRace(); //the method is called to select the race of the user
-
-        //finalize the user name, race, and class
-        System.out.println("Fascinating! Well it's nice to meet you, " + user.getName() + " the " + user.getUserRace() + " " + user.getUserClass() + "!");
-        Thread.sleep(2000); //this will be used to pause the program for 2 seconds, allowing the user to read the previous text
-        System.out.print("Now, are you ready to begin your journey into the unknown oh faithful " + user.getUserClass() + "? Y/N: ");
-        String ready = scanner.nextLine(); //this will be used to get the user input of whether they are ready or not
-        if (ready.equalsIgnoreCase("Y")) {
-            //method to begin the game
-        }
-        else if (ready.equalsIgnoreCase("N")) {
-            System.out.println("Well that's too bad. You're already here, so here's the damn game.");
-            //method to begin the game
-        }
-
-        scanner.close();
-    }
-
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
-    public static void userChoose() {
+    public static void userTravelChoose() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What would you like to do?\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
             case 1:
-                user.getInventory(); //this will be used to call the method to check the inventory
+                user.accessInventory(); //this will be used to call the method to check the inventory
                 break;
             case 2:
-                user.getEquipment(); //this will be used to call the method to check the equipment
+                user.accessEquipment(); //this will be used to call the method to check the equipment
                 break;
             case 3:
                 //combat method (not yet implemented)
                 break;
             default:
                 System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
-                userChoose(); //this will be used to call the method again if the user inputs an invalid choice
+                userTravelChoose(); //this will be used to call the method again if the user inputs an invalid choice
+        }
+        scanner.close();
+    }
+
+    //This method serves as a way to fight the monster, access the inventory, and run away from the monster.
+    public static void userFightChoose() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Quick! What do you do?\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
+        int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
+        switch (choice) {
+            case 1:
+                //combat method (not yet implemented)
+                break;
+            case 2:
+                user.accessInventory(); //this will be used to call the method to check the inventory
+                break;
+            case 3:
+                runAway(); //this will be used to call the method to run away from the monster
+                break;
+            default:
+                System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
+                userFightChoose(); //this will be used to call the method again if the user inputs an invalid choice
         }
         scanner.close();
     }
@@ -239,7 +283,13 @@ class Game {
     //kickDownDoor method (draw a monster card)
 
 
-    //treasureLoot method (gives loot after defeating a monster or looting the room)
+    //defeatedMonster method (gives loot after defeating a monster or looting the room)
+    public static void defeatedMonster(Monster monster) {
+        //this will be used to give loot after defeating a monster or looting the room
+        System.out.println("You have defeated the monster! You gain 1 level and 1 treasure card!");
+        user.levelUp(monster); //this will be used to level up the user
+        newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+    }
 
 
     //This method serves as the main method to run the game.
@@ -250,7 +300,7 @@ class Game {
         
         //do while loop to keep the game going until the user is level 10 or is dead
         /* do {
-            userChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
+            userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
         */
