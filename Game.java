@@ -11,7 +11,7 @@ import java.util.Random;
 
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
-
+    private static Scanner scanner = new Scanner(System.in); //this will be used to create a scanner object to read user input
     private static Map<String, Treasure> treasureMap = new HashMap<>(); //this will be used to create a hashmap of the treasure cards
     private static Map<String, Monster> monsterMap = new HashMap<>(); //this will be used to create a hashmap of the monster cards
     private static Creature user; //this will be used to create the user object of the class Creature
@@ -93,7 +93,6 @@ class Game {
 
     //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
     public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
-        Scanner scanner = new Scanner(System.in);
 
         //Introduce the user to the game and ask for their information.
         System.out.println("(It is recommended you read the README file before playing this game.)"); //this will help ensure that the user has read over the rules of the game and understands how it works
@@ -129,7 +128,6 @@ class Game {
             //method to begin the game
         }
 
-        scanner.close();
     }
 
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
@@ -199,43 +197,43 @@ class Game {
         }
     }    
 
-    public static void newMonster() {
+    public static Monster newMonster() {
         Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
-        if (randomMonster != null) {
-            System.out.println(randomMonster); //this will be used to display the random monster card that was drawn
+        if (randomMonster == null) {
+            System.out.println("no monster"); //this will be used to display the random monster card that was drawn
         }
+        return randomMonster; //this will be used to return the random monster card that was drawn
     }
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("What would you like to do?\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
             case 1:
                 user.accessInventory(); //this will be used to call the method to check the inventory
+                //after the inventory is displayed, the user will be asked if they want to use an item
                 break;
             case 2:
                 user.accessEquipment(); //this will be used to call the method to check the equipment
+                //after the equipment is displayed, the user will be asked if they want to discard an item
                 break;
             case 3:
-                //combat method (not yet implemented)
+                kickDownDoor();
                 break;
             default:
                 System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
                 userTravelChoose(); //this will be used to call the method again if the user inputs an invalid choice
         }
-        scanner.close();
     }
 
     //This method serves as a way to fight the monster, access the inventory, and run away from the monster.
-    public static void userFightChoose() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Quick! What do you do?\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
+    public static void userFightChoose(Monster monster) {
+        System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
             case 1:
-                //combat method (not yet implemented)
+                combat(monster); //this will be used to call the method to fight the monster
                 break;
             case 2:
                 user.accessInventory(); //this will be used to call the method to check the inventory
@@ -245,9 +243,8 @@ class Game {
                 break;
             default:
                 System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
-                userFightChoose(); //this will be used to call the method again if the user inputs an invalid choice
+                userFightChoose(monster); //this will be used to call the method again if the user inputs an invalid choice
         }
-        scanner.close();
     }
 
 
@@ -266,12 +263,23 @@ class Game {
         }
     }
 
+    //kickDownDoor method (draw a monster card) / also serving as the combat loop
+    public static void kickDownDoor() {
+        System.out.println("You kick down the door in front of you and find a monster!");
+        Monster monster = newMonster(); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
+        System.out.println(monster.toString()); //this will be used to display the random monster card that was drawn
+        userFightChoose(monster); //this will be used to call the method to fight the monster
+    }
 
-    //This method serves as the combat loop, where the user will be able to fight monsters and gain loot.
-
-
-    //kickDownDoor method (draw a monster card)
-
+    //this method compares the user level to the monster level and determines if the user wins or loses
+    public static void combat(Monster monster) {
+        if (user.getLevel() > monster.getLevel()) {
+            System.out.println("You have defeated the " + monster.getName() + "!");
+            defeatedMonster(monster); //this will be used to call the method to give loot after defeating a monster
+        } else {
+            System.out.println("You have been defeated by the " + monster.getName() + "!");
+        }
+    }
 
     //defeatedMonster method (gives loot after defeating a monster or looting the room)
     public static void defeatedMonster(Monster monster) {
@@ -280,18 +288,19 @@ class Game {
         newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
     }
 
-
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
-        //gameIntro(); //call gameIntro method to start the game
-        
+        gameIntro(); //call gameIntro method to start the game
+        //kickDownDoor();
         //do while loop to keep the game going until the user is level 10 or is dead
-        /* do {
+        do {
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
-        */
-        }
+        
+    }
+    
+    
 }

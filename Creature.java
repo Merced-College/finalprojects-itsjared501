@@ -143,7 +143,7 @@ public class Creature {
         }
     }
 
-    //This method equips armor, hand, hands, and footgear cards to the user.
+    //This method equips armor, two hand, hands, and footgear cards to the user.
     public void equip(Treasure item) {
         if (item.getType().equalsIgnoreCase("armor")) {
             //add armor to the user if applicable
@@ -229,6 +229,10 @@ public class Creature {
             System.out.println("This item cannot be equipped.");
         }
     }
+
+    //this method will ask the user if they want use any items in their inventory after they access their inventory
+
+    //this method will ask the user if they want to discard any of their equipment after they access their equipment
 
     public void selectClass() {
         //display all classes and their passives
