@@ -99,10 +99,10 @@ public class Creature {
     //This method increases the user's level when they defeat a monster.
     public void levelUp(Monster monster) {
         if (monster.getLevel() >= 14) {
-            level += 2;;
+            level = Math.min(level + 2, 10);
             System.out.println("You are now level " + level + "!");
         } else {
-            level++;
+            level = Math.min(level + 1, 10);
             System.out.println("You are now level " + level + "!");
         }
     }
@@ -112,9 +112,18 @@ public class Creature {
         System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
     }
 
+    public int inventorySizeCheck() {
+        if (userRace.equalsIgnoreCase("Dwarf")) {
+            return 12;
+        }
+        else {
+            return 10;
+        }
+    }
+
     //This method adds treasures gained from the fight to the user's inventory.
     public void addToInventory(Treasure newItem) {
-        if (inventory.size() >= 10) {
+        if (inventory.size() >= inventorySizeCheck()) {
             System.out.println("Inventory is full. Cannot add more items.");
             return;
         }

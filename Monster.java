@@ -33,6 +33,6 @@ public class Monster {
 
     @Override
     public String toString() {
-        return "Level " + level + " - " + name + "\n" + description + "\n" + "Bad Stuff: " + badStuff;
+        return "Level " + level + " - " + name + "\n" + description + "\nBad Stuff: " + badStuff;
     }
 }

@@ -207,6 +207,7 @@ class Game {
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
+        while (true) {
         System.out.println("What would you like to do?\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
@@ -225,10 +226,12 @@ class Game {
                 System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
                 userTravelChoose(); //this will be used to call the method again if the user inputs an invalid choice
         }
+        }
     }
 
     //This method serves as a way to fight the monster, access the inventory, and run away from the monster.
     public static void userFightChoose(Monster monster) {
+        while (true) {
         System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
@@ -245,14 +248,22 @@ class Game {
                 System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
                 userFightChoose(monster); //this will be used to call the method again if the user inputs an invalid choice
         }
+        }
     }
 
 
     //This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
     public static boolean runAway() {
         Random random = new Random();
+        int bonus = 0;
+        if (user.getUserRace().equalsIgnoreCase("Elf")) { //if the user is an elf, they get a +1 to their roll
+            bonus++;
+        }
+        if (user.getUserClass().equalsIgnoreCase("Thief")) { //if the user is an elf, they get a +1 to their roll
+            bonus++;
+        }
         //generate a die roll from 1-6
-        int roll = random.nextInt(6)+1; //this will be used to roll a die 1-6
+        int roll = random.nextInt(6)+1+bonus; //this will be used to roll a die 1-6
         //the player needs to roll a 4 or higher to successfully run away from the monster
         if (roll < 4) { 
             System.out.println("You failed to run away from the monster!");
@@ -267,6 +278,10 @@ class Game {
     public static void kickDownDoor() {
         System.out.println("You kick down the door in front of you and find a monster!");
         Monster monster = newMonster(); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
+        if (monster == null) {
+            System.out.println("No monster found!"); //this will be used to display the random monster card that was drawn
+            return; //this will be used to return if there is no monster   
+        }
         System.out.println(monster.toString()); //this will be used to display the random monster card that was drawn
         userFightChoose(monster); //this will be used to call the method to fight the monster
     }
@@ -299,7 +314,11 @@ class Game {
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
-        
+        scanner.close(); //this will be used to close the scanner
+        System.out.println("You have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
+        System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
+        System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
+
     }
     
     
