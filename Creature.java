@@ -111,7 +111,15 @@ public class Creature {
         }
     }
 
+    //this method decreases the user's level due to bad stuff
+    public void decreaseLevel(int amount) {
+
+    }
+
     //This method icreases the user's attack power from items and will immediately deactivate after the fight.
+    public void tempAPAdd(int power) {
+
+    }
 
     //This method will be used to increase the user's attack power from weapons, armor, and footgear.
     public void addAttackPower(int power) {
@@ -159,8 +167,21 @@ public class Creature {
             System.out.println("This item cannot be used in combat.");
         }*/
         System.out.println("You have used " + item.getName() + ".");
-        addAttackPower(item.getAttackPower());
-        removeFromInventory(item);
+        if (item.getType().equalsIgnoreCase("armor") || item.getType().equalsIgnoreCase("hand") || item.getType().equalsIgnoreCase("two hands") || item.getType().equalsIgnoreCase("footgear")) {
+            addAttackPower(item.getAttackPower());
+            removeFromInventory(item);
+        }
+        else if (item.getType().equalsIgnoreCase("go up a level")) {
+            level++;
+        }
+        else if (item.getType().equalsIgnoreCase("item")) {
+            //tempAPAdd(item.getAttackPower());
+            addAttackPower(item.getAttackPower());
+            removeFromInventory(item);
+        }
+        else {
+            System.out.println("Item cannot be found in inventory.");
+        }
     }
 
     //this method will search the user's inventory for a specific item and use it and remove it from the inventory

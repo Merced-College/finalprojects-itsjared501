@@ -130,6 +130,19 @@ class Game {
 
     }
 
+    public static void gameOutro() {
+        if (user.getLevel() == 10) {
+            System.out.println("You have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
+            System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
+            System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
+        }
+        else if (user.isAlive() == false) {
+            System.out.println("Death has laid their gaze upon your being. You have failed to complete your journey.");
+            System.out.println("You have fought well " + user.getName() + ". But not well enough.");
+
+        }
+    }
+
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
         if (treasureMap.isEmpty()) {
             System.out.println("The treasure map is empty!");
@@ -214,7 +227,7 @@ class Game {
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
         while (true) {
-        System.out.println("\nWhat would you like to do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
+        System.out.println("\nWhat would you like to do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         //scanner.nextLine();
         switch (choice) {
@@ -352,20 +365,20 @@ class Game {
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
+        
         gameIntro(); //call gameIntro method to start the game
         starterItem(); //gives the user an item in the beginning of the game
         //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
-        //kickDownDoor();
+        
         //do while loop to keep the game going until the user is level 10 or is dead
         do {
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
-        scanner.close(); //this will be used to close the scanner
-        System.out.println("You have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
-        System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
-        System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
+        
+        gameOutro(); //the user has reached level 10 or has died
 
+        scanner.close(); //this will be used to close the scanner
     }
     
     
