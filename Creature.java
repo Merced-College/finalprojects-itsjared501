@@ -7,6 +7,7 @@ public class Creature {
     private String userRace;
     private int level = 1;
     private int attackPower = 1;
+    private int tempAttackPower = 0;
     private boolean isAlive = true;
 
     private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
@@ -49,20 +50,26 @@ public class Creature {
     //This method accesses the user's inventory and displays all the items in it.
     public void accessInventory() {
         //for loop to display all the items in the inventory
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
+        System.out.println("Inventory * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+        if (inventory.size() == 0) {
+            System.out.println("Inventory is empty. \n");
+        }
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println(inventory.get(i).toString() + "\n");
         }
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+        System.out.println("Inventory Size: " + inventorySizeCheck() +" * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
 
     public void accessEquipment() {
         //for loop to display all the items in the equipment
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
-        for (int i = 0; i < equipment.size(); i++) {
-            System.out.println(equipment.get(i).toString());
+        System.out.println("Equipment * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+        if (equipment.size() == 0) {
+            System.out.println("Equipment is empty. \n");
         }
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
+        for (int i = 0; i < equipment.size(); i++) {
+            System.out.println(equipment.get(i).toString() + "\n");
+        }
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
 
     public void setClass (String chosenClass) {
@@ -104,9 +111,11 @@ public class Creature {
     public void levelUp(Monster monster) {
         if (monster.getLevel() >= 14) {
             level = Math.min(level + 2, 10);
+            attackPower += 2;
             System.out.println("You are now level " + level + "!");
         } else {
             level = Math.min(level + 1, 10);
+            attackPower++;
             System.out.println("You are now level " + level + "!");
         }
     }
@@ -118,12 +127,17 @@ public class Creature {
 
     //This method icreases the user's attack power from items and will immediately deactivate after the fight.
     public void tempAPAdd(int power) {
+        tempAttackPower = power;
+        attackPower += tempAttackPower;
+    }
 
+    public void resetTempAP() {
+        attackPower -= tempAttackPower;
     }
 
     //This method will be used to increase the user's attack power from weapons, armor, and footgear.
     public void addAttackPower(int power) {
-        attackPower = level + power;
+        attackPower += power;
         System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
     }
 
@@ -170,13 +184,15 @@ public class Creature {
         if (item.getType().equalsIgnoreCase("armor") || item.getType().equalsIgnoreCase("hand") || item.getType().equalsIgnoreCase("two hands") || item.getType().equalsIgnoreCase("footgear")) {
             addAttackPower(item.getAttackPower());
             removeFromInventory(item);
+            equipment.add(item);
         }
         else if (item.getType().equalsIgnoreCase("go up a level")) {
             level++;
+            attackPower++;
         }
         else if (item.getType().equalsIgnoreCase("item")) {
-            //tempAPAdd(item.getAttackPower());
-            addAttackPower(item.getAttackPower());
+            tempAPAdd(item.getAttackPower());
+            //addAttackPower(item.getAttackPower());
             removeFromInventory(item);
         }
         else {
@@ -198,7 +214,7 @@ public class Creature {
     //this method will search the user's equipment for a specific item and remove it from the equipment
     public void discardEquipped(String itemName) {
         for (int i = 0; i < equipment.size(); i++) {
-            if (equipment.get(i).getName().equalsIgnoreCase(itemName)) {
+            if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) {
                 equipment.remove(i);
                 return;
             }

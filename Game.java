@@ -219,13 +219,19 @@ class Game {
     }
 
     //this method gets a random for the user in the beginning of the game
-    public static void starterItem() {
-        Treasure starterItem = getRandomTreasure(treasureMap);
-        user.addToInventory(starterItem);
+    public static void starterItems() {
+        Treasure starterItem1 = getRandomTreasure(treasureMap);
+        Treasure starterItem2 = getRandomTreasure(treasureMap);
+        Treasure starterItem3 = getRandomTreasure(treasureMap);
+        user.addToInventory(starterItem1);
+        user.addToInventory(starterItem2);
+        user.addToInventory(starterItem3);
+        System.out.println("Starter items added to inventory!");
     }
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
+        user.resetTempAP();
         while (true) {
         System.out.println("\nWhat would you like to do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
@@ -346,17 +352,18 @@ class Game {
     //this method will ask the user if they want to discard any of their equipment after they access their equipment
     public static void discardEquippedChoice() {
         System.out.println("Would you like to discard any of your equipment? Y/N: ");
+        scanner.nextLine();
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
             System.out.println("What item would you like to discard? "); //this will be used to ask the user what item they want to discard
-            String item = scanner.nextLine(); //this will be used to get the user input of what item they want to discard
+            String item = scanner.nextLine().trim(); //this will be used to get the user input of what item they want to discard
             user.discardEquipped(item); //this will be used to call the method to discard the equipped item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
-        } else {
+        } /*else {
             System.out.println("We are wasting time! Y or N!!");
             discardEquippedChoice(); //this will be used to call the method again if the user inputs an invalid choice
-        }
+        }*/
     }
 
     //activateSomeClassPassives method will activate some class passives that aren't already implemented in the game
@@ -367,7 +374,7 @@ class Game {
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
         
         gameIntro(); //call gameIntro method to start the game
-        starterItem(); //gives the user an item in the beginning of the game
+        starterItems(); //gives the user items in the beginning of the game
         //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
         
         //do while loop to keep the game going until the user is level 10 or is dead
