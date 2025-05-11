@@ -6,7 +6,7 @@ public class Creature {
     private String userClass;
     private String userRace;
     private int level = 1;
-    private int attackPower;
+    private int attackPower = 1;
     private boolean isAlive = true;
 
     private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
@@ -51,9 +51,9 @@ public class Creature {
         //for loop to display all the items in the inventory
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
         for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(inventory.get(i).toString());
+            System.out.println(inventory.get(i).toString() + "\n");
         }
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
 
     public void accessEquipment() {
@@ -149,21 +149,24 @@ public class Creature {
         }
     }
 
+    //the method should iterate through the inventory and find the item with the matching name; if found, then use. else, cannot find
     public void useItem(Treasure item) {
-        //if the item is a potion, use it
-        if (item.getType().equalsIgnoreCase("item")) {
+        /*if (item.getName().equalsIgnoreCase("item")) {
             System.out.println("You have used " + item.getName() + ".");
             addAttackPower(item.getAttackPower());
             removeFromInventory(item);
         } else {
             System.out.println("This item cannot be used in combat.");
-        }
+        }*/
+        System.out.println("You have used " + item.getName() + ".");
+        addAttackPower(item.getAttackPower());
+        removeFromInventory(item);
     }
 
     //this method will search the user's inventory for a specific item and use it and remove it from the inventory
     public void searchInventory(String itemName) {
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName.trim())) {
                 useItem(inventory.get(i));
                 return;
             }

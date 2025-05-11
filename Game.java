@@ -205,23 +205,31 @@ class Game {
         return randomMonster; //this will be used to return the random monster card that was drawn
     }
 
+    //this method gets a random for the user in the beginning of the game
+    public static void starterItem() {
+        Treasure starterItem = getRandomTreasure(treasureMap);
+        user.addToInventory(starterItem);
+    }
+
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
         while (true) {
-        System.out.println("What would you like to do?\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
+        System.out.println("\nWhat would you like to do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1)  Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
+        //scanner.nextLine();
         switch (choice) {
             case 1:
                 user.accessInventory(); //this will be used to call the method to check the inventory
                 System.out.println("P.S. You cannot use items (not including weapons, armor or footgear) until you are in combat.");
+                useItemChoice();
                 break;
             case 2:
                 user.accessEquipment(); //this will be used to call the method to check the equipment
-                //after the equipment is displayed, the user will be asked if they want to discard an item
+                discardEquippedChoice();//after the equipment is displayed, the user will be asked if they want to discard an item
                 break;
             case 3:
                 kickDownDoor();
-                break;
+                return;
             default:
                 System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
                 userTravelChoose(); //this will be used to call the method again if the user inputs an invalid choice
@@ -232,19 +240,19 @@ class Game {
     //This method serves as a way to fight the monster, access the inventory, and run away from the monster.
     public static void userFightChoose(Monster monster) {
         while (true) {
-        System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
+        System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
         switch (choice) {
             case 1:
                 combat(monster); //this will be used to call the method to fight the monster
-                break;
+                return;
             case 2:
                 user.accessInventory(); //this will be used to call the method to check the inventory
                 useItemChoice();
                 break;
             case 3:
                 runAway(monster); //this will be used to call the method to run away from the monster
-                break;
+                return;
             default:
                 System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
                 userFightChoose(monster); //this will be used to call the method again if the user inputs an invalid choice
@@ -290,16 +298,16 @@ class Game {
 
     //this method compares the user level to the monster level and determines if the user wins or loses
     public static void combat(Monster monster) {
-        if (user.getLevel() > monster.getLevel()) {
+        if (user.getAttackPower() > monster.getLevel()) {
             System.out.println("You have defeated the " + monster.getName() + "!");
-            defeatedMonster(monster); //this will be used to call the method to give loot after defeating a monster
+            lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
         } else {
             System.out.println("You have been defeated by the " + monster.getName() + "!");
         }
     }
 
     //defeatedMonster method (gives loot after defeating a monster or looting the room)
-    public static void defeatedMonster(Monster monster) {
+    public static void lootAndLevel(Monster monster) {
         //this will be used to give loot after defeating a monster or looting the room
         user.levelUp(monster); //this will be used to level up the user
         newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
@@ -308,17 +316,18 @@ class Game {
     //this method will ask the user if they want use any items in their inventory after they access their inventory
     public static void useItemChoice() {
         System.out.println("Would you like to use any items in your inventory? Y/N: ");
+        scanner.nextLine();
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
             System.out.println("What item would you like to use? "); //this will be used to ask the user what item they want to use
-            String item = scanner.nextLine(); //this will be used to get the user input of what item they want to use
+            String item = scanner.nextLine().trim(); //this will be used to get the user input of what item they want to use
             user.searchInventory(item); //this will be used to call the method to search the inventory for the possible item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
-        } else {
+        } /*else {
             System.out.println("We are wasting time! Y or N!!");
             useItemChoice(); //this will be used to call the method again if the user inputs an invalid choice
-        }
+        }*/
     }
 
     //this method will ask the user if they want to discard any of their equipment after they access their equipment
@@ -344,6 +353,7 @@ class Game {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
         gameIntro(); //call gameIntro method to start the game
+        starterItem(); //gives the user an item in the beginning of the game
         //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
         //kickDownDoor();
         //do while loop to keep the game going until the user is level 10 or is dead
