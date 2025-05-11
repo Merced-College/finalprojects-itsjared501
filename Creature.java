@@ -49,16 +49,20 @@ public class Creature {
     //This method accesses the user's inventory and displays all the items in it.
     public void accessInventory() {
         //for loop to display all the items in the inventory
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println(inventory.get(i).toString());
         }
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
     }
 
     public void accessEquipment() {
         //for loop to display all the items in the equipment
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
         for (int i = 0; i < equipment.size(); i++) {
             System.out.println(equipment.get(i).toString());
         }
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * ");
     }
 
     public void setClass (String chosenClass) {
@@ -107,11 +111,15 @@ public class Creature {
         }
     }
 
+    //This method icreases the user's attack power from items and will immediately deactivate after the fight.
+
+    //This method will be used to increase the user's attack power from weapons, armor, and footgear.
     public void addAttackPower(int power) {
         attackPower = level + power;
         System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
     }
 
+    //This method ensures that the inventory size is checked before adding items to the inventory.
     public int inventorySizeCheck() {
         if (userRace.equalsIgnoreCase("Dwarf")) {
             return 12;
@@ -150,6 +158,28 @@ public class Creature {
         } else {
             System.out.println("This item cannot be used in combat.");
         }
+    }
+
+    //this method will search the user's inventory for a specific item and use it and remove it from the inventory
+    public void searchInventory(String itemName) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
+                useItem(inventory.get(i));
+                return;
+            }
+        }
+        System.out.println("Item not found in inventory.");
+    }
+
+    //this method will search the user's equipment for a specific item and remove it from the equipment
+    public void discardEquipped(String itemName) {
+        for (int i = 0; i < equipment.size(); i++) {
+            if (equipment.get(i).getName().equalsIgnoreCase(itemName)) {
+                equipment.remove(i);
+                return;
+            }
+        }
+        System.out.println("Item not found in equipment.");
     }
 
     //This method equips armor, two hand, hands, and footgear cards to the user.
@@ -238,10 +268,6 @@ public class Creature {
             System.out.println("This item cannot be equipped.");
         }
     }
-
-    //this method will ask the user if they want use any items in their inventory after they access their inventory
-
-    //this method will ask the user if they want to discard any of their equipment after they access their equipment
 
     public void selectClass() {
         //display all classes and their passives

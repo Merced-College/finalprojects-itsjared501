@@ -213,7 +213,7 @@ class Game {
         switch (choice) {
             case 1:
                 user.accessInventory(); //this will be used to call the method to check the inventory
-                //after the inventory is displayed, the user will be asked if they want to use an item
+                System.out.println("P.S. You cannot use items (not including weapons, armor or footgear) until you are in combat.");
                 break;
             case 2:
                 user.accessEquipment(); //this will be used to call the method to check the equipment
@@ -240,9 +240,10 @@ class Game {
                 break;
             case 2:
                 user.accessInventory(); //this will be used to call the method to check the inventory
+                useItemChoice();
                 break;
             case 3:
-                runAway(); //this will be used to call the method to run away from the monster
+                runAway(monster); //this will be used to call the method to run away from the monster
                 break;
             default:
                 System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
@@ -253,7 +254,7 @@ class Game {
 
 
     //This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
-    public static boolean runAway() {
+    public static boolean runAway(Monster monster) {
         Random random = new Random();
         int bonus = 0;
         if (user.getUserRace().equalsIgnoreCase("Elf")) { //if the user is an elf, they get a +1 to their roll
@@ -267,9 +268,10 @@ class Game {
         //the player needs to roll a 4 or higher to successfully run away from the monster
         if (roll < 4) { 
             System.out.println("You failed to run away from the monster!");
+            //monster.badStuffOccurs() method
             return false; //this will be used to return true if the user fails
         } else {
-            System.out.println("You have successfully ran away from the monster!");
+            System.out.println("You have successfully ran away from the monster! You have not leveled up; you sleep the night in. Waking up to face the same door again.");
             return true; //this will be used to return false if the user succeeds
         }
     }
@@ -303,11 +305,46 @@ class Game {
         newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
     }
 
+    //this method will ask the user if they want use any items in their inventory after they access their inventory
+    public static void useItemChoice() {
+        System.out.println("Would you like to use any items in your inventory? Y/N: ");
+        String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
+        if (choice.equalsIgnoreCase("Y")) {
+            System.out.println("What item would you like to use? "); //this will be used to ask the user what item they want to use
+            String item = scanner.nextLine(); //this will be used to get the user input of what item they want to use
+            user.searchInventory(item); //this will be used to call the method to search the inventory for the possible item
+        } else if (choice.equalsIgnoreCase("N")) {
+            System.out.println("Okay, then onward!");
+        } else {
+            System.out.println("We are wasting time! Y or N!!");
+            useItemChoice(); //this will be used to call the method again if the user inputs an invalid choice
+        }
+    }
+
+    //this method will ask the user if they want to discard any of their equipment after they access their equipment
+    public static void discardEquippedChoice() {
+        System.out.println("Would you like to discard any of your equipment? Y/N: ");
+        String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
+        if (choice.equalsIgnoreCase("Y")) {
+            System.out.println("What item would you like to discard? "); //this will be used to ask the user what item they want to discard
+            String item = scanner.nextLine(); //this will be used to get the user input of what item they want to discard
+            user.discardEquipped(item); //this will be used to call the method to discard the equipped item
+        } else if (choice.equalsIgnoreCase("N")) {
+            System.out.println("Okay, then onward!");
+        } else {
+            System.out.println("We are wasting time! Y or N!!");
+            discardEquippedChoice(); //this will be used to call the method again if the user inputs an invalid choice
+        }
+    }
+
+    //activateSomeClassPassives method will activate some class passives that aren't already implemented in the game
+
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
         gameIntro(); //call gameIntro method to start the game
+        //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
         //kickDownDoor();
         //do while loop to keep the game going until the user is level 10 or is dead
         do {
