@@ -145,7 +145,7 @@ class Game {
 
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
         if (treasureMap.isEmpty()) {
-            System.out.println("The treasure map is empty!");
+            System.out.println("There are no more treasures!");
             return null;
         }
 
@@ -166,7 +166,7 @@ class Game {
 
     public static Monster getRandomMonster(Map<String, Monster> monsterMap) {
         if (monsterMap.isEmpty()) {
-            System.out.println("The monster map is empty!");
+            System.out.println("There are no more monsters in the dungeon!");
             return null;
         } 
 
@@ -212,9 +212,6 @@ class Game {
 
     public static Monster newMonster() {
         Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
-        if (randomMonster == null) {
-            System.out.println("no monster"); //this will be used to display the random monster card that was drawn
-        }
         return randomMonster; //this will be used to return the random monster card that was drawn
     }
 

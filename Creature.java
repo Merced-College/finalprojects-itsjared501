@@ -206,7 +206,7 @@ public class Creature {
             removeFromInventory(item);
         }
         else {
-            System.out.println("Item cannot be found in inventory.");
+            System.out.println("Item cannot be used.");
         }
     }
 
