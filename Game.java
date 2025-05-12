@@ -132,12 +132,12 @@ class Game {
 
     public static void gameOutro() {
         if (user.getLevel() == 10) {
-            System.out.println("You have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
+            System.out.println("\nYou have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
             System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
             System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
         }
         else if (user.isAlive() == false) {
-            System.out.println("Death has laid their gaze upon your being. You have failed to complete your journey.");
+            System.out.println("\nDeath has laid their gaze upon your being. You have failed to complete your journey.");
             System.out.println("You have fought well " + user.getName() + ". But not well enough.");
 
         }
@@ -226,7 +226,7 @@ class Game {
         user.addToInventory(starterItem1);
         user.addToInventory(starterItem2);
         user.addToInventory(starterItem3);
-        System.out.println("Starter items added to inventory!");
+        System.out.println("\nStarter items added to inventory!");
     }
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
@@ -305,20 +305,20 @@ class Game {
 
     //kickDownDoor method (draw a monster card) / also serving as the combat loop
     public static void kickDownDoor() {
-        System.out.println("You kick down the door in front of you and find a monster!");
+        System.out.println("\nYou kick down the door in front of you and find a monster!");
         Monster monster = newMonster(); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
         if (monster == null) {
             System.out.println("No monster found!"); //this will be used to display the random monster card that was drawn
             return; //this will be used to return if there is no monster   
         }
-        System.out.println(monster.toString()); //this will be used to display the random monster card that was drawn
+        System.out.println("\n" + monster.toString()); //this will be used to display the random monster card that was drawn
         userFightChoose(monster); //this will be used to call the method to fight the monster
     }
 
     //this method compares the user level to the monster level and determines if the user wins or loses
     public static void combat(Monster monster) {
         if (user.getAttackPower() > monster.getLevel()) {
-            System.out.println("You have defeated the " + monster.getName() + "!");
+            System.out.println("\nYou have defeated the " + monster.getName() + "!");
             lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
         } else {
             System.out.println("You have been defeated by the " + monster.getName() + "!");
@@ -327,7 +327,6 @@ class Game {
 
     //defeatedMonster method (gives loot after defeating a monster or looting the room)
     public static void lootAndLevel(Monster monster) {
-        //this will be used to give loot after defeating a monster or looting the room
         user.levelUp(monster); //this will be used to level up the user
         newTreasure(monster); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
     }
@@ -338,7 +337,7 @@ class Game {
         scanner.nextLine();
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
-            System.out.println("What item would you like to use? "); //this will be used to ask the user what item they want to use
+            System.out.println("What item would you like to use? (type in full name of item)"); //this will be used to ask the user what item they want to use
             String item = scanner.nextLine().trim(); //this will be used to get the user input of what item they want to use
             user.searchInventory(item); //this will be used to call the method to search the inventory for the possible item
         } else if (choice.equalsIgnoreCase("N")) {
@@ -355,7 +354,7 @@ class Game {
         scanner.nextLine();
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
-            System.out.println("What item would you like to discard? "); //this will be used to ask the user what item they want to discard
+            System.out.println("What item would you like to discard? (type in full name of item)"); //this will be used to ask the user what item they want to discard
             String item = scanner.nextLine().trim(); //this will be used to get the user input of what item they want to discard
             user.discardEquipped(item); //this will be used to call the method to discard the equipped item
         } else if (choice.equalsIgnoreCase("N")) {

@@ -54,8 +54,11 @@ public class Creature {
         if (inventory.size() == 0) {
             System.out.println("Inventory is empty. \n");
         }
-        for (int i = 0; i < inventory.size(); i++) {
+        /*for (int i = 0; i < inventory.size(); i++) {
             System.out.println(inventory.get(i).toString() + "\n");
+        }*/
+        for (Treasure item : inventory) {
+            System.out.println(item.toString() + "\n");
         }
         System.out.println("Inventory Size: " + inventorySizeCheck() +" * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
@@ -66,8 +69,11 @@ public class Creature {
         if (equipment.size() == 0) {
             System.out.println("Equipment is empty. \n");
         }
-        for (int i = 0; i < equipment.size(); i++) {
+        /*for (int i = 0; i < equipment.size(); i++) {
             System.out.println(equipment.get(i).toString() + "\n");
+        }*/
+        for (Treasure item : equipment) {
+            System.out.println(item.toString() + "\n");
         }
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
@@ -133,12 +139,13 @@ public class Creature {
 
     public void resetTempAP() {
         attackPower -= tempAttackPower;
+        tempAttackPower = 0;
     }
 
     //This method will be used to increase the user's attack power from weapons, armor, and footgear.
     public void addAttackPower(int power) {
         attackPower += power;
-        System.out.println("Attack power increased by " + power + ". Total attack power: " + attackPower);
+        System.out.println("Attack power increased by " + power);
     }
 
     //This method ensures that the inventory size is checked before adding items to the inventory.
@@ -173,14 +180,7 @@ public class Creature {
 
     //the method should iterate through the inventory and find the item with the matching name; if found, then use. else, cannot find
     public void useItem(Treasure item) {
-        /*if (item.getName().equalsIgnoreCase("item")) {
-            System.out.println("You have used " + item.getName() + ".");
-            addAttackPower(item.getAttackPower());
-            removeFromInventory(item);
-        } else {
-            System.out.println("This item cannot be used in combat.");
-        }*/
-        System.out.println("You have used " + item.getName() + ".");
+        System.out.println("\nYou have used " + item.getName() + ".");
         if (item.getType().equalsIgnoreCase("armor") || item.getType().equalsIgnoreCase("hand") || item.getType().equalsIgnoreCase("two hands") || item.getType().equalsIgnoreCase("footgear")) {
             addAttackPower(item.getAttackPower());
             removeFromInventory(item);
@@ -189,10 +189,10 @@ public class Creature {
         else if (item.getType().equalsIgnoreCase("go up a level")) {
             level++;
             attackPower++;
+            removeFromInventory(item);
         }
         else if (item.getType().equalsIgnoreCase("item")) {
             tempAPAdd(item.getAttackPower());
-            //addAttackPower(item.getAttackPower());
             removeFromInventory(item);
         }
         else {
@@ -215,7 +215,10 @@ public class Creature {
     public void discardEquipped(String itemName) {
         for (int i = 0; i < equipment.size(); i++) {
             if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) {
+                Treasure item = equipment.get(i);
+                attackPower -= item.getAttackPower();
                 equipment.remove(i);
+                System.out.println(item.getName() + " has been discarded.");
                 return;
             }
         }
@@ -223,91 +226,125 @@ public class Creature {
     }
 
     //This method equips armor, two hand, hands, and footgear cards to the user.
-    public void equip(Treasure item) {
+    /*public void equip(Treasure item) {
         if (item.getType().equalsIgnoreCase("armor")) {
-            //add armor to the user if applicable
-             for (int i = 0; i < equipment.size(); i++) {
+            // Check if armor is already equipped
+            for (int i = 0; i < equipment.size(); i++) {
                 if (equipment.get(i).getType().equalsIgnoreCase("armor")) {
                     System.out.println("You already have armor equipped. Would you like to replace it? (yes/no)");
                     String response = scanner.nextLine();
                     if (response.equalsIgnoreCase("yes")) {
-                        equipment.remove(i);
-                        equipment.add(item);
-                        removeFromInventory(item);
-                        System.out.println(item.getName() + "has been equipped.");
+                        Treasure oldItem = equipment.get(i); // Remove the old armor
+                        //attackPower -= oldItem.getAttackPower(); // Subtract the old item's attack power
+                        discardEquipped(oldItem.getName());
+                        equipment.add(item); // Add the new armor
+                        attackPower += item.getAttackPower(); // Add the new item's attack power
+                        removeFromInventory(item); // Remove the item from inventory
+                        System.out.println(item.getName() + " has been equipped.");
+                        return; // Exit after replacing the item
                     } else {
                         System.out.println("Armor not replaced.");
+                        return; // Exit without replacing the item
                     }
                 }
                 else {
+                    // If no footgear is equipped, add the new footgear
                     equipment.add(item);
+                    attackPower += item.getAttackPower(); // Add the item's attack power
                     removeFromInventory(item);
+                    System.out.println(item.getName() + " has been equipped.");
                 }
             }
+            System.out.println(item.getName() + " has been equipped.");
         } else if (item.getType().equalsIgnoreCase("hand")) {
-            //add hand to the user
+            // Check if a hand item is already equipped
             for (int i = 0; i < equipment.size(); i++) {
                 if (equipment.get(i).getType().equalsIgnoreCase("hand") || equipment.get(i).getType().equalsIgnoreCase("two hands")) {
                     System.out.println("You already have a hand equipped. Would you like to replace it? (yes/no)");
                     String response = scanner.nextLine();
                     if (response.equalsIgnoreCase("yes")) {
-                        equipment.remove(i);
-                        equipment.add(item);
-                        removeFromInventory(item);
+                        Treasure oldItem = equipment.get(i); // Remove the old hand item
+                        discardEquipped(oldItem.getName());
+                        //attackPower -= oldItem.getAttackPower(); // Subtract the old item's attack power
+                        equipment.add(item); // Add the new hand item
+                        attackPower += item.getAttackPower(); // Add the new item's attack power
+                        removeFromInventory(item); // Remove the item from inventory
                         System.out.println(item.getName() + " has been equipped.");
+                        return; // Exit after replacing the item
                     } else {
                         System.out.println("Hand not replaced.");
+                        return; // Exit without replacing the item
                     }
                 }
                 else {
+                    // If no footgear is equipped, add the new footgear
                     equipment.add(item);
+                    attackPower += item.getAttackPower(); // Add the item's attack power
                     removeFromInventory(item);
+                    System.out.println(item.getName() + " has been equipped.");
                 }
             }
         } else if (item.getType().equalsIgnoreCase("two hands")) {
-            //add hands to the user
+            // Check if a two-hand item is already equipped
             for (int i = 0; i < equipment.size(); i++) {
                 if (equipment.get(i).getType().equalsIgnoreCase("hand") || equipment.get(i).getType().equalsIgnoreCase("two hands")) {
                     System.out.println("You already have a hand equipped. Would you like to replace it? (yes/no)");
                     String response = scanner.nextLine();
                     if (response.equalsIgnoreCase("yes")) {
-                        equipment.remove(i);
-                        equipment.add(item);
-                        removeFromInventory(item);
+                        Treasure oldItem = equipment.get(i); // Remove the old hand item
+                        discardEquipped(oldItem.getName());                    
+                        //attackPower -= oldItem.getAttackPower(); // Subtract the old item's attack power
+                        equipment.add(item); // Add the new two-hand item
+                        attackPower += item.getAttackPower(); // Add the new item's attack power
+                        removeFromInventory(item); // Remove the item from inventory
                         System.out.println(item.getName() + " has been equipped.");
+                        return; // Exit after replacing the item
                     } else {
-                        System.out.println("Hands not replaced.");
+                        System.out.println("Two-hand item not replaced.");
+                        return; // Exit without replacing the item
                     }
                 }
                 else {
+                    // If no footgear is equipped, add the new footgear
                     equipment.add(item);
+                    attackPower += item.getAttackPower(); // Add the item's attack power
                     removeFromInventory(item);
+                    System.out.println(item.getName() + " has been equipped.");
                 }
             }
         } else if (item.getType().equalsIgnoreCase("footgear")) {
-            //add footgear to the user
+            // Check if footgear is already equipped
             for (int i = 0; i < equipment.size(); i++) {
                 if (equipment.get(i).getType().equalsIgnoreCase("footgear")) {
                     System.out.println("You already have footgear equipped. Would you like to replace it? (yes/no)");
                     String response = scanner.nextLine();
                     if (response.equalsIgnoreCase("yes")) {
-                        equipment.remove(i);
-                        equipment.add(item);
-                        removeFromInventory(item);
+                        Treasure oldItem = equipment.get(i); // Remove the old footgear
+                        attackPower -= oldItem.getAttackPower(); // Subtract the old item's attack power
+                        discardEquipped(oldItem.getName());                       
+                        //equipment.add(item); // Add the new footgear
+                        attackPower += item.getAttackPower(); // Add the new item's attack power
+                        removeFromInventory(item); // Remove the item from inventory
                         System.out.println(item.getName() + " has been equipped.");
+                        return; // Exit after replacing the item
                     } else {
                         System.out.println("Footgear not replaced.");
+                        return; // Exit without replacing the item
                     }
                 }
                 else {
+                    // If no footgear is equipped, add the new footgear
                     equipment.add(item);
+                    attackPower += item.getAttackPower(); // Add the item's attack power
                     removeFromInventory(item);
+                    System.out.println(item.getName() + " has been equipped.");
                 }
             }
         } else {
             System.out.println("This item cannot be equipped.");
         }
-    }
+        equipment.add(item);
+    } */
 
     public void selectClass() {
         //display all classes and their passives
