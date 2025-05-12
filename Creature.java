@@ -43,7 +43,16 @@ public class Creature {
         return attackPower;
     }
 
+    public LinkedList<Treasure> getInventory() {
+        return inventory;
+    }
+
     public boolean isAlive() {
+        return isAlive;
+    }
+
+    public boolean setLivability(boolean livability) {
+        isAlive = livability;
         return isAlive;
     }
 
@@ -126,9 +135,10 @@ public class Creature {
         }
     }
 
-    //this method decreases the user's level due to bad stuff
-    public void decreaseLevel(int amount) {
-
+    //this method decreases the user's level and attack power due to bad stuff
+    public void decreaseLevel() {
+        level--;
+        attackPower--;
     }
 
     //This method icreases the user's attack power from items and will immediately deactivate after the fight.

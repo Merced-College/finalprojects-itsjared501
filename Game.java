@@ -136,7 +136,7 @@ class Game {
             System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
             System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
         }
-        else if (user.isAlive() == false) {
+        else if (!user.isAlive()) {
             System.out.println("\nDeath has laid their gaze upon your being. You have failed to complete your journey.");
             System.out.println("You have fought well " + user.getName() + ". But not well enough.");
 
@@ -294,11 +294,12 @@ class Game {
         int roll = random.nextInt(6)+1+bonus; //this will be used to roll a die 1-6
         //the player needs to roll a 4 or higher to successfully run away from the monster
         if (roll < 4) { 
-            System.out.println("You failed to run away from the monster!");
-            //monster.badStuffOccurs() method
+            System.out.println("You rolled a " + roll + "! You failed to run away from the monster!");
+            monster.badStuffOccurs(user);
             return false; //this will be used to return true if the user fails
         } else {
-            System.out.println("You have successfully ran away from the monster! You have not leveled up; you sleep the night in. Waking up to face the same door again.");
+            System.out.println("You rolled a " + roll + "! You have successfully ran away from the monster!");
+            System.out.println("You have not leveled up; you sleep the night in. Waking up to face the same door again.");
             return true; //this will be used to return false if the user succeeds
         }
     }
@@ -373,6 +374,7 @@ class Game {
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
         
         gameIntro(); //call gameIntro method to start the game
+        user.setLivability(true);
         starterItems(); //gives the user items in the beginning of the game
         //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
         
@@ -380,7 +382,7 @@ class Game {
         do {
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
-        while (user.isAlive() == true && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
+        while (user.isAlive() && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead
         
         gameOutro(); //the user has reached level 10 or has died
 
