@@ -208,10 +208,23 @@ class Game {
                 treasureMap.remove(item1.getName());
             }   
         }
+        if (user.getUserClass().equalsIgnoreCase("Thief")) {
+            Treasure thiefBonus = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
+            if (thiefBonus != null) {
+                System.out.println("\nYour sly hands picked up an extra treasure!");
+                System.out.println("New Item: " + thiefBonus); //this will be used to display the random treasure card that was drawn
+                user.addToInventory(thiefBonus); //this will be used to add the item to the user's inventory
+                treasureMap.remove(thiefBonus.getName());
+            }   
+        }
     }    
 
     public static Monster newMonster() {
         Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
+        //if the user is an elf, cleric, or wizard, the monster receives a -1 to their level
+        if (user.getUserRace().equalsIgnoreCase("Elf") || user.getUserClass().equalsIgnoreCase("Cleric") || user.getUserClass().equalsIgnoreCase("Wizard")) {
+            randomMonster.setLevel(randomMonster.getLevel() - 1);
+        }
         return randomMonster; //this will be used to return the random monster card that was drawn
     }
 
@@ -281,10 +294,8 @@ class Game {
     public static boolean runAway(Monster monster) {
         Random random = new Random();
         int bonus = 0;
-        if (user.getUserRace().equalsIgnoreCase("Elf")) { //if the user is an elf, they get a +1 to their roll
-            bonus++;
-        }
-        if (user.getUserClass().equalsIgnoreCase("Thief")) { //if the user is an elf, they get a +1 to their roll
+        //if the user is an elf, halfling, or thief, they get a +1 to their roll
+        if (user.getUserRace().equalsIgnoreCase("Elf") || user.getUserRace().equalsIgnoreCase("Halfling") || user.getUserClass().equalsIgnoreCase("Thief")) { 
             bonus++;
         }
         //generate a die roll from 1-6
@@ -319,6 +330,17 @@ class Game {
 
     //this method compares the user level to the monster level and determines if the user wins or loses
     public static void combat(Monster monster) {
+        //if the user is a warrior, they just need to match the monster's level to defeat it
+        if (user.getUserClass().equalsIgnoreCase("Warrior")) {
+            if (user.getAttackPower() >= monster.getLevel()) {
+                System.out.println("\nYou have defeated the " + monster.getName() + "!");
+                lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
+            } else {
+                System.out.println("You have been defeated by the " + monster.getName() + "!");
+            }
+            return;
+        }
+        //under normal circumstances, the user's AP must be greater than the monster's level
         if (user.getAttackPower() > monster.getLevel()) {
             System.out.println("\nYou have defeated the " + monster.getName() + "!");
             lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
@@ -368,6 +390,9 @@ class Game {
     }
 
     //activateSomeClassPassives method will activate some class passives that aren't already implemented in the game
+    public static void activateClassPassives() {
+
+    }
 
     //This method serves as the main method to run the game.
     public static void main(String[] args) throws InterruptedException {

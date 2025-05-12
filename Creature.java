@@ -264,7 +264,7 @@ public class Creature {
         System.out.println("Charm Spell:   Decades of academic study combined with your killer looks come in handy every now and then.");
         System.out.println("               While in combat, you may discard your entire inventory to gain +10. You must have at least two items to sacrifice.");
         System.out.println("Arcane Immunity:   Those sleepless nights studying Defense Against the Dark Arts have paid off.");
-        System.out.println("                   Monsters with a level 10 or higher are -1 against you.");
+        System.out.println("                   Monsters receive -1 to their attack power.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
         System.out.print("Select a class by entering the class you want to select. "); //ask for int (class)
@@ -281,11 +281,11 @@ public class Creature {
         System.out.println("Swag Bag:    Mighty though tiny, you're used to carrying a lot of stuff.");
         System.out.println("             You can carry 2 extra items in your inventory.");
         System.out.println("Worker of Metal:    You've got a knack for metalwork and smithing.");
-        System.out.println("                    When using a big item, you receive a +1 to your attack power.");
+        System.out.println("                    When using a two handed weapon, you receive a +1 to your attack power.");
         System.out.println(" ");
         System.out.println("2. ELF - Tall, slender, and graceful. They're known for their keen senses and beautiful features that catches the eye.");
         System.out.println("Pointy-Ears:   AHHHHHH! You-your ears are so pointy! So intimidating!");
-        System.out.println("               Monsters receive -1 to their attack power.");
+        System.out.println("               Monsters receive -1 to their level.");
         System.out.println("Beautacious and Vivacious:   You are the most beautiful person in the world. (In the game at least.)");
         System.out.println("                             You gain +1 to run away.");
         System.out.println(" ");
@@ -293,7 +293,7 @@ public class Creature {
         System.out.println("              they got luck on their side. P.S. They are not hobbits.");
         System.out.println("My Brother-in-law is a Leprechaun:   You're naturally pretty lucky. But people really just think it's");
         System.out.println("                                     because of your brother-in-law.");
-        System.out.println("                                     You have 2 attempts to run away from a monster.");
+        System.out.println("                                     You gain +1 to run away.");
         System.out.println("Small body, Big Heart:   Empathy goes a long way. Tell your exes that.");
         System.out.println("                         You are immune to the bad stuff of Monsters level 1-10.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
