@@ -47,6 +47,10 @@ public class Creature {
         return inventory;
     }
 
+    public LinkedList<Treasure> getEquipment() {
+        return equipment;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -96,6 +100,7 @@ public class Creature {
         } 
         else if (chosenClass.equalsIgnoreCase("warrior")) {
             userClass = "Warrior";
+            level++;
         } 
         else if (chosenClass.equalsIgnoreCase("wizard")) {
             userClass = "Wizard";
@@ -109,6 +114,7 @@ public class Creature {
     public void setRace (String chosenRace) {
         if (chosenRace.equalsIgnoreCase("dwarf")) {
             userRace = "Dwarf";
+            level++;
         } 
         else if (chosenRace.equalsIgnoreCase("elf")) {
             userRace = "Elven";
@@ -202,6 +208,19 @@ public class Creature {
             removeFromInventory(item);
         }
         else if (item.getType().equalsIgnoreCase("item")) {
+            if (getUserClass().equalsIgnoreCase("Wizard")) {
+                if (item.getName().equalsIgnoreCase("Cotion of Ponfusion") || item.getName().equalsIgnoreCase("Flaming Poison Potion") ||
+                    item.getName().equalsIgnoreCase("Potion of Halitosis") || item.getName().equalsIgnoreCase("Potion of Idiotic Bravery") || 
+                    item.getName().equalsIgnoreCase("Sleep Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Mirage") ||
+                    item.getName().equalsIgnoreCase("Electric Radioactive Acid Potion") || item.getName().equalsIgnoreCase("Freezing Explosive Potion") ||
+                    item.getName().equalsIgnoreCase("Friendship Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Flame Wall") ||
+                    item.getName().equalsIgnoreCase("Potion of backstabbery") || item.getName().equalsIgnoreCase("Magic Missile")) {
+                    tempAPAdd(item.getAttackPower());
+                    tempAPAdd(2);
+                    removeFromInventory(item);
+                    return;
+                }
+            }
             tempAPAdd(item.getAttackPower());
             removeFromInventory(item);
         }
@@ -281,7 +300,7 @@ public class Creature {
         System.out.println("Swag Bag:    Mighty though tiny, you're used to carrying a lot of stuff.");
         System.out.println("             You can carry 2 extra items in your inventory.");
         System.out.println("Worker of Metal:    You've got a knack for metalwork and smithing.");
-        System.out.println("                    When using a two handed weapon, you receive a +1 to your attack power.");
+        System.out.println("                    You gain +1 to attack power.");
         System.out.println(" ");
         System.out.println("2. ELF - Tall, slender, and graceful. They're known for their keen senses and beautiful features that catches the eye.");
         System.out.println("Pointy-Ears:   AHHHHHH! You-your ears are so pointy! So intimidating!");

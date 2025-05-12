@@ -337,6 +337,7 @@ class Game {
                 lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
             } else {
                 System.out.println("You have been defeated by the " + monster.getName() + "!");
+                monster.badStuffOccurs(user);
             }
             return;
         }
@@ -406,6 +407,15 @@ class Game {
         
         //do while loop to keep the game going until the user is level 10 or is dead
         do {
+            if (user.getUserClass().equalsIgnoreCase("Dwarf")) {
+                if (user.getEquipment().isEmpty()) {
+                    user.addAttackPower(2);
+                }
+                else {
+                    user.decreaseLevel();
+                    user.decreaseLevel();
+                }
+            }
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat
         }
         while (user.isAlive() && user.getLevel() < 10); //this will be used to keep the game going until the user is level 10 or is dead

@@ -14,6 +14,12 @@ public class Monster {
     }
 
     public void badStuffOccurs(Creature user) {
+        //if the user is a halfling, they ignore the bad stuff of monsters level 1-10
+        if (user.getUserClass().equalsIgnoreCase("Halfling") && level <= 10) {
+            System.out.println("Your halfling being has granted you the grace of ignoring this monster's bad stuff.");
+            return;
+        }
+        //depending on the monster's level, the user will face bad stuff
         if (level <= 4) {
             if (!user.getInventory().isEmpty()) {
                 Random random = new Random();
@@ -80,6 +86,6 @@ public class Monster {
 
     @Override
     public String toString() {
-        return "Level " + level + " - " + name + "\n" + description + "\nBad Stuff: " + badStuff;
+        return "Level " + getLevel() + " - " + name + "\n" + description + "\nBad Stuff: " + badStuff;
     }
 }
