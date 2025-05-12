@@ -15,7 +15,7 @@ public class Monster {
 
     public void badStuffOccurs(Creature user) {
         //if the user is a halfling, they ignore the bad stuff of monsters level 1-10
-        if (user.getUserClass().equalsIgnoreCase("Halfling") && level <= 10) {
+        if (user.getUserClass().equalsIgnoreCase("Halfling") && getLevel() <= 10) {
             System.out.println("Your halfling being has granted you the grace of ignoring this monster's bad stuff.");
             return;
         }

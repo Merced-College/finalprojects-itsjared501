@@ -347,6 +347,7 @@ class Game {
             lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
         } else {
             System.out.println("You have been defeated by the " + monster.getName() + "!");
+            monster.badStuffOccurs(user);
         }
     }
 
@@ -407,7 +408,7 @@ class Game {
         
         //do while loop to keep the game going until the user is level 10 or is dead
         do {
-            if (user.getUserClass().equalsIgnoreCase("Dwarf")) {
+            if (user.getUserClass().equalsIgnoreCase("Cleric")) {
                 if (user.getEquipment().isEmpty()) {
                     user.addAttackPower(2);
                 }

@@ -100,7 +100,7 @@ public class Creature {
         } 
         else if (chosenClass.equalsIgnoreCase("warrior")) {
             userClass = "Warrior";
-            level++;
+            attackPower++;
         } 
         else if (chosenClass.equalsIgnoreCase("wizard")) {
             userClass = "Wizard";
@@ -114,7 +114,7 @@ public class Creature {
     public void setRace (String chosenRace) {
         if (chosenRace.equalsIgnoreCase("dwarf")) {
             userRace = "Dwarf";
-            level++;
+            attackPower++;
         } 
         else if (chosenRace.equalsIgnoreCase("elf")) {
             userRace = "Elven";
@@ -264,7 +264,7 @@ public class Creature {
         System.out.println("Divine Intervention:    Monsters are blinded by the holy light (it's a stagelight).");
         System.out.println("                        Monsters receive -1 to their attack power.");
         System.out.println("Holy Hands:   Your god has given you the power to smite your foes with a light touch.");
-        System.out.println("              When you do not have a weapon equipped, you gain +2 to your attack power.");
+        System.out.println("              When you do not have anything equipped, you gain +2 to your attack power.");
         System.out.println(" ");
         System.out.println("2. THIEF - A nimble and witty rogue who uses their cunning and agility to sneak around and get what they want.");
         System.out.println("Expertise:   A good fight comes with greater rewards, whether its given or stolen.");
@@ -281,7 +281,7 @@ public class Creature {
         System.out.println(" ");
         System.out.println("4. WIZARD - A master of the mystic arts. Drawing power from the elements and arcane knowledge to cast spells.");
         System.out.println("Charm Spell:   Decades of academic study combined with your killer looks come in handy every now and then.");
-        System.out.println("               While in combat, you may discard your entire inventory to gain +10. You must have at least two items to sacrifice.");
+        System.out.println("               Gain an extra +2 when using magical items.");
         System.out.println("Arcane Immunity:   Those sleepless nights studying Defense Against the Dark Arts have paid off.");
         System.out.println("                   Monsters receive -1 to their attack power.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
