@@ -29,9 +29,9 @@
 14,Insurance Salesman,This man won't shut up about the amazing health coverage his agency offers.,Lose a level and an item
 14,Stoned Golem,This stone golem looks a little...stoned?,Lose a level and an item
 14,Unspeakably Awful Indescribable Horror,You open the door to a pitch black room. Several tentacles come at you pulling you in!,Lose a level and an item
-16,Hippogriff,Will not pursue anyone of Level 3 or below. Otherwise it lunges at you with a piercing scream!,You are dead.
-16,Wight Brothers,Will not pursue anyone of Level 3 or below. Otherwise they launch towards you in their impressive aircraft!,You are dead.
-16,King Tut,Will not pursue anyone of Level 3 or below. Otherwise face the judgement of his highness.,You are dead.
+16,Hippogriff,Will not pursue anyone of Level 4 or below. Otherwise it lunges at you with a piercing scream!,You are dead.
+16,Wight Brothers,Will not pursue anyone of Level 4 or below. Otherwise they launch towards you in their impressive aircraft!,You are dead.
+16,King Tut,Will not pursue anyone of Level 4 or below. Otherwise face the judgement of his highness.,You are dead.
 18,Squidzilla,Will not pursue anyone of Level 4 or below. Otherwise its girthy tentacles detain you. Break free!,You are dead.
 18,Hades,Will not pursue anyone of Level 4 or below. Otherwise fight for your life. Or live as a shadow in his underworld.,You are dead.
-20,Plutonium Dragon,Will not pursue anyone of Level 5 or below. Otherwise fight for glory! The wealth! And well...to stay alive!,You are dead.
+20,Plutonium Dragon,Will not pursue anyone of Level 4 or below. Otherwise fight for glory! The wealth! And well...to stay alive!,You are dead.

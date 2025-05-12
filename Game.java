@@ -290,7 +290,11 @@ class Game {
         //generate a die roll from 1-6
         int roll = random.nextInt(6)+1+bonus; //this will be used to roll a die 1-6
         //the player needs to roll a 4 or higher to successfully run away from the monster
-        if (roll < 4) { 
+        if (user.getLevel() == 4 && monster.getLevel() >= 16) {
+            System.out.println("The monster found you weak and did not pursue you.");
+            return true;
+        }
+        else if (roll < 4) { 
             System.out.println("You rolled a " + roll + "! You failed to run away from the monster!");
             monster.badStuffOccurs(user);
             return false; //this will be used to return true if the user fails
