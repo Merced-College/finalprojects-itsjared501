@@ -46,7 +46,7 @@ public class Monster {
                 System.out.println("Bad Stuff has occurred, but you don't own anything to lose. Yikes...");
             }
         } 
-        else if (level >= 6 && level <= 10) { //if the monster is level 6-10, the user will lose a level
+        else if (level >= 5 && level <= 10) { //if the monster is level 6-10, the user will lose a level
             if (user.getLevel() > 1) { //user has to be at least level 2 to lose a level
                 user.decreaseLevel(); //user level is decremented
                 System.out.println("Bad Stuff: You lost a level");
@@ -55,7 +55,7 @@ public class Monster {
                 System.out.println("Bad Stuff has occurred, but you're already the lowest level. Loser.");
             }
         }
-        else if (level >= 12 && level <= 14) { //if the monster level is 12-14, the user will lose an item and a level
+        else if (level >= 11 && level <= 14) { //if the monster level is 12-14, the user will lose an item and a level
             //uses the same previous code
             if (!user.getInventory().isEmpty()) {
                 Random random = new Random();

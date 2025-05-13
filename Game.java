@@ -409,7 +409,10 @@ class Game {
             user.searchInventory(item); //this will be used to call the method to search the inventory for the possible item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
-        } 
+        } else {
+            System.out.println("I think you made a mistake. Try again.");
+            useItemChoice(); //this will be used to call the method again if the user inputs an invalid choice
+        }
     }
 
     //this method will ask the user if they want to discard any of their equipment after they access their equipment
@@ -423,6 +426,9 @@ class Game {
             user.discardEquipped(item); //this will be used to call the method to discard the equipped item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
+        } else {
+            System.out.println("I think you made a mistake. Try again.");
+            discardEquippedChoice(); //this will be used to call the method again if the user inputs an invalid choice
         }
     }
 
