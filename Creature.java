@@ -16,6 +16,16 @@ public class Creature {
     private int tempAttackPower = 0;
     private boolean isAlive = true;
 
+    private boolean clericBonus = false; //cleric's +2 bonus to AP passive
+    
+    public boolean isClericBonusApplied() { //getter for cleric bonus
+        return clericBonus;
+    }
+
+    public void setClericBonus(boolean applied) { //setter for cleric bonus
+        clericBonus = applied;
+    }
+
     private LinkedList<Treasure> inventory = new LinkedList<Treasure>();
     private LinkedList<Treasure> equipment = new LinkedList<Treasure>();
     
@@ -136,11 +146,11 @@ public class Creature {
         if (monster.getLevel() >= 14) { //if the monster is level 14+, the user levels up twice
             level = Math.min(level + 2, 10); //ensures the user won't go past level 10
             attackPower += 2; //attack power is also increased by two because it increments with level
-            System.out.println("You are now level " + level + "!");
+            System.out.println("You are now level " + level + "!\n");
         } else { //if the monster is level 12 or less, the user levels up once
             level = Math.min(level + 1, 10); //ensures the user won't go past level 10
             attackPower++; //attack power is also increased by two because it increments with level
-            System.out.println("You are now level " + level + "!");
+            System.out.println("You are now level " + level + "!\n");
         }
     }
 
@@ -166,6 +176,12 @@ public class Creature {
     public void addAttackPower(int power) {
         attackPower += power; //increases AP based on modifier applied by weapons, armor, and footgear
         System.out.println("Attack power increased by " + power);
+    }
+
+    //This method is specifically used to decrease the user's AP when they're a cleric and they have something equipped.
+    public void removeAttackPower(int power) {
+        attackPower -= power; //decreases AP based on modifier applied by weapons, armor, and footgear
+        System.out.println("Attack power decreased by " + power);
     }
 
     //This method ensures that the inventory size is checked before adding items to the inventory.
@@ -257,8 +273,7 @@ public class Creature {
                     item.getName().equalsIgnoreCase("Electric Radioactive Acid Potion") || item.getName().equalsIgnoreCase("Freezing Explosive Potion") ||
                     item.getName().equalsIgnoreCase("Friendship Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Flame Wall") ||
                     item.getName().equalsIgnoreCase("Potion of backstabbery") || item.getName().equalsIgnoreCase("Magic Missile")) {
-                    tempAPAdd(item.getAttackPower()); //item temporarily buffs user
-                    tempAPAdd(2); //wizard bonus
+                    tempAPAdd(item.getAttackPower() + 2); //item temporarily buffs user + wizard bonus
                     removeFromInventory(item); //removes item from inventory
                     return; //return so that the user doesn't get buffed again
                 }

@@ -146,11 +146,11 @@ class Game {
         if (user.getLevel() == 10) { //when level 10
             System.out.println("\nYou have reached level 10! You have won Munchkin!"); 
             System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); 
-            System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); 
+            System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!\n"); 
         }
         else if (!user.isAlive()) { // when dead
             System.out.println("\nDeath has laid their gaze upon your being. You have failed to complete your journey.");
-            System.out.println("You have fought well " + user.getName() + ". But not well enough.");
+            System.out.println("You have fought well " + user.getName() + ". But not well enough.\n");
 
         }
     }
@@ -444,12 +444,13 @@ class Game {
         do {
             //if the user is a cleric and has nothing equipped, they gain a +2 AP bonus, otherwise, the bonus doesn't apply
             if (user.getUserClass().equalsIgnoreCase("Cleric")) {
-                if (user.getEquipment().isEmpty()) { //if equipment is empty
+                if (user.getEquipment().isEmpty() && !user.isClericBonusApplied()) { //if equipment is empty
                     user.addAttackPower(2);
+                    user.setClericBonus(true);
                 }
-                else { //if there is something in equipment
-                    user.decreaseLevel();
-                    user.decreaseLevel();
+                else if (!user.getEquipment().isEmpty() && user.isClericBonusApplied()) { //if there is something in equipment
+                    user.removeAttackPower(2);
+                    user.setClericBonus(false);
                 }
             }
             userTravelChoose(); //this will be used to call the method to check the inventory, equipment, or continue to combat

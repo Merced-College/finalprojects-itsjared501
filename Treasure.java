@@ -1,4 +1,3 @@
-
 /**
  * Treasure.java
  * @author Jared Lee
