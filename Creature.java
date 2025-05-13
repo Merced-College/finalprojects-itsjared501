@@ -272,7 +272,8 @@ public class Creature {
                     item.getName().equalsIgnoreCase("Sleep Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Mirage") ||
                     item.getName().equalsIgnoreCase("Electric Radioactive Acid Potion") || item.getName().equalsIgnoreCase("Freezing Explosive Potion") ||
                     item.getName().equalsIgnoreCase("Friendship Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Flame Wall") ||
-                    item.getName().equalsIgnoreCase("Potion of backstabbery") || item.getName().equalsIgnoreCase("Magic Missile")) {
+                    item.getName().equalsIgnoreCase("Potion of backstabbery") || item.getName().equalsIgnoreCase("Magic Lamp") ||
+                    item.getName().equalsIgnoreCase("Magic Missile") || item.getName().equalsIgnoreCase("Pollymorph Potion")) {
                     tempAPAdd(item.getAttackPower() + 2); //item temporarily buffs user + wizard bonus
                     removeFromInventory(item); //removes item from inventory
                     return; //return so that the user doesn't get buffed again
