@@ -221,7 +221,7 @@ class Game {
         if (monster.getLevel() >= 14) {
             Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (item1 != null) {
-                System.out.println("New Item: " + item1); //this will be used to display the random treasure card that was drawn
+                System.out.println("New Item: " + item1 + "\n"); //this will be used to display the random treasure card that was drawn
                 user.addToInventory(item1); //this will be used to add the item to the user's inventory
                 treasureMap.remove(item1.getName()); //removes the item from the treasureMap
             }
@@ -257,7 +257,7 @@ class Game {
     public static Monster newMonster() {
         Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
         //if the user is an elf, cleric, or wizard, the monster receives a -1 to their level
-        if ((user.getUserRace().equalsIgnoreCase("Elf") || user.getUserClass().equalsIgnoreCase("Cleric") || user.getUserClass().equalsIgnoreCase("Wizard")) && randomMonster.getLevel() > 1) {
+        if (user.getUserRace().equalsIgnoreCase("Elf") || user.getUserClass().equalsIgnoreCase("Cleric") || user.getUserClass().equalsIgnoreCase("Wizard") && randomMonster.getLevel() > 1) {
             randomMonster.setLevel(randomMonster.getLevel() - 1);
         }
         return randomMonster; //this will be used to return the random monster card that was drawn
