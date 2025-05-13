@@ -130,29 +130,32 @@ class Game {
 
     }
 
+    //the method is used when the user reaches level 10 or dies
     public static void gameOutro() {
-        if (user.getLevel() == 10) {
-            System.out.println("\nYou have reached level 10! You have won Munchkin!"); //this will be used to display the message when the user reaches level 10
-            System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); //this will be used to display the message when the user reaches level 10
-            System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); //this will be used to display the message when the user reaches level 10
+        if (user.getLevel() == 10) { //when level 10
+            System.out.println("\nYou have reached level 10! You have won Munchkin!"); 
+            System.out.println("Thank you " + user.getName() + ". Your abilities have helped rid of terrible creatures in this world."); 
+            System.out.println("May your future adventures prove fruitful. The world is far safer with you here to protect it!"); 
         }
-        else if (!user.isAlive()) {
+        else if (!user.isAlive()) { // when dead
             System.out.println("\nDeath has laid their gaze upon your being. You have failed to complete your journey.");
             System.out.println("You have fought well " + user.getName() + ". But not well enough.");
 
         }
     }
 
+    //the method will pull a random treasure object from the treasureMap and return it
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
+        //if the map is empty, then display that no treasures are available
         if (treasureMap.isEmpty()) {
             System.out.println("There are no more treasures!");
             return null;
         }
 
         // Get a random key from the HashMap
-        Object[] keys = treasureMap.keySet().toArray();
+        Object[] keys = treasureMap.keySet().toArray(); //creates an array based on the keys from the treasureMap
         Random random = new Random();
-        String randomKey = (String) keys[random.nextInt(keys.length)];
+        String randomKey = (String) keys[random.nextInt(keys.length)]; //a random key based on the length of the array previously created
 
         // Get the Treasure object associated with the random key
         Treasure selectedTreasure = treasureMap.get(randomKey);
@@ -164,16 +167,18 @@ class Game {
         return selectedTreasure;
     }
 
+    //the method will pull a random monster object from the monsterMap and return it
     public static Monster getRandomMonster(Map<String, Monster> monsterMap) {
+        //if the map is empty, then display that no monsters are available
         if (monsterMap.isEmpty()) {
             System.out.println("There are no more monsters in the dungeon!");
             return null;
         } 
 
         // Get a random key from the HashMap
-        Object[] keys = monsterMap.keySet().toArray();
+        Object[] keys = monsterMap.keySet().toArray(); //creates an array based on the keys from the treasureMap
         Random random = new Random();
-        String randomKey = (String) keys[random.nextInt(keys.length)];
+        String randomKey = (String) keys[random.nextInt(keys.length)]; //a random key based on the length of the array previously created
 
         // Get the Monster object associated with the random key
         Monster selectedMonster = monsterMap.get(randomKey);
@@ -185,50 +190,55 @@ class Game {
         return selectedMonster;
     }
 
+    //the method will give the user a new item(s) following their victory; the amount of treasures based on the monsters level
     public static void newTreasure(Monster monster) {
+        //when the monster is level 14 and above, give the user two treasures
         if (monster.getLevel() >= 14) {
             Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (item1 != null) {
                 System.out.println("New Item: " + item1); //this will be used to display the random treasure card that was drawn
                 user.addToInventory(item1); //this will be used to add the item to the user's inventory
-                treasureMap.remove(item1.getName());
+                treasureMap.remove(item1.getName()); //removes the item from the treasureMap
             }
             Treasure item2 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (item2 != null) {
                 System.out.println("New Item: " + item2); //this will be used to display the random treasure card that was drawn
                 user.addToInventory(item2); //this will be used to add the item to the user's inventory
-                treasureMap.remove(item2.getName());
+                treasureMap.remove(item2.getName()); //removes the item from the treasureMap
             }
         }
+        //when the monster is anything lower, then the user only receives one treasure
         else {
             Treasure item1 = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (item1 != null) {
                 System.out.println("New Item: " + item1); //this will be used to display the random treasure card that was drawn
                 user.addToInventory(item1); //this will be used to add the item to the user's inventory
-                treasureMap.remove(item1.getName());
+                treasureMap.remove(item1.getName()); //removes the item from the treasureMap
             }   
         }
+        //when the user is a theif, they gain an extra treasure due to class passive
         if (user.getUserClass().equalsIgnoreCase("Thief")) {
             Treasure thiefBonus = getRandomTreasure(treasureMap); //this will be used to get a random treasure card from the hashmap and remove it from the hashmap
             if (thiefBonus != null) {
                 System.out.println("\nYour sly hands picked up an extra treasure!");
                 System.out.println("New Item: " + thiefBonus); //this will be used to display the random treasure card that was drawn
                 user.addToInventory(thiefBonus); //this will be used to add the item to the user's inventory
-                treasureMap.remove(thiefBonus.getName());
+                treasureMap.remove(thiefBonus.getName()); //removes the item from the treasureMap
             }   
         }
     }    
 
+    //the method gets a new monster for the user to fight
     public static Monster newMonster() {
         Monster randomMonster = getRandomMonster(monsterMap); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
         //if the user is an elf, cleric, or wizard, the monster receives a -1 to their level
-        if (user.getUserRace().equalsIgnoreCase("Elf") || user.getUserClass().equalsIgnoreCase("Cleric") || user.getUserClass().equalsIgnoreCase("Wizard")) {
+        if ((user.getUserRace().equalsIgnoreCase("Elf") || user.getUserClass().equalsIgnoreCase("Cleric") || user.getUserClass().equalsIgnoreCase("Wizard")) && randomMonster.getLevel() > 1) {
             randomMonster.setLevel(randomMonster.getLevel() - 1);
         }
         return randomMonster; //this will be used to return the random monster card that was drawn
     }
 
-    //this method gets a random for the user in the beginning of the game
+    //this method gets random items for the user in the beginning of the game
     public static void starterItems() {
         Treasure starterItem1 = getRandomTreasure(treasureMap);
         Treasure starterItem2 = getRandomTreasure(treasureMap);
@@ -241,51 +251,50 @@ class Game {
 
     //This method serves as a way for the user to access their inventory (not yet implemented), equipment (not yet implemented), and continue to the next combat.
     public static void userTravelChoose() {
-        user.resetTempAP();
+        user.resetTempAP(); //if items were used in the combat prior, its effects are removed
         while (true) {
         System.out.println("\nWhat would you like to do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Check Inventory\n(2) Check Equipment\n(3) Continue to Combat");
         int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
-        //scanner.nextLine();
         switch (choice) {
-            case 1:
+            case 1: //check inventory
                 user.accessInventory(); //this will be used to call the method to check the inventory
                 System.out.println("P.S. You cannot use items (not including weapons, armor or footgear) until you are in combat.");
                 useItemChoice();
-                break;
-            case 2:
+                break; //goes back to choice
+            case 2: //check equipment
                 user.accessEquipment(); //this will be used to call the method to check the equipment
                 discardEquippedChoice();//after the equipment is displayed, the user will be asked if they want to discard an item
-                break;
-            case 3:
+                break; //goes back to choice
+            case 3: //continue to combat
                 kickDownDoor();
-                return;
-            default:
+                return; //get out of method
+            default: //if anything else is typed
                 System.out.println("Can you hear me? I said 1, 2, or 3. Not whatever the hell you just typed.");
                 userTravelChoose(); //this will be used to call the method again if the user inputs an invalid choice
-        }
+            }
         }
     }
 
     //This method serves as a way to fight the monster, access the inventory, and run away from the monster.
     public static void userFightChoose(Monster monster) {
         while (true) {
-        System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
-        int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
-        switch (choice) {
-            case 1:
-                combat(monster); //this will be used to call the method to fight the monster
-                return;
-            case 2:
-                user.accessInventory(); //this will be used to call the method to check the inventory
-                useItemChoice();
-                break;
-            case 3:
-                runAway(monster); //this will be used to call the method to run away from the monster
-                return;
-            default:
-                System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
-                userFightChoose(monster); //this will be used to call the method again if the user inputs an invalid choice
-        }
+            System.out.println("\nQuick! What do you do? Your level: " + user.getLevel() + " Your attack power: " + user.getAttackPower() + "\n(1) Fight the Monster\n(2) Check Inventory\n(3) Try to Run Away");
+            int choice = scanner.nextInt(); //this will be used to get the user input of what they want to do
+            switch (choice) {
+                case 1: //fight the monster
+                    combat(monster); //this will be used to call the method to fight the monster
+                    return; //get out of method
+                case 2: //check inventory
+                    user.accessInventory(); //this will be used to call the method to check the inventory
+                    useItemChoice(); //ask what item to use
+                    break; //goes back to choice
+                case 3: //try to run away
+                    runAway(monster); //this will be used to call the method to run away from the monster
+                    return; //get out of method
+                default:
+                    System.out.println("Are you serious?! We cannot afford mistakes like this! 1, 2, or 3!!");
+                    userFightChoose(monster); //this will be used to call the method again if the user inputs an invalid choice
+            }
         }
     }
 
@@ -293,26 +302,26 @@ class Game {
     //This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
     public static boolean runAway(Monster monster) {
         Random random = new Random();
-        int bonus = 0;
+        int bonus = 0; //a bonus that only applies under certain circumstances
         //if the user is an elf, halfling, or thief, they get a +1 to their roll
         if (user.getUserRace().equalsIgnoreCase("Elf") || user.getUserRace().equalsIgnoreCase("Halfling") || user.getUserClass().equalsIgnoreCase("Thief")) { 
-            bonus++;
+            bonus++; //add 1 to bonus
         }
         //generate a die roll from 1-6
-        int roll = random.nextInt(6)+1+bonus; //this will be used to roll a die 1-6
+        int roll = random.nextInt(6)+1+bonus; //this will be used to roll a die 1-6 and will add the bonus if it applies
         //the player needs to roll a 4 or higher to successfully run away from the monster
-        if (user.getLevel() == 4 && monster.getLevel() >= 16) {
+        if (user.getLevel() <= 4 && monster.getLevel() >= 16) { //monsters level 16+ will NOT pursue the user if they're level 4 or below
             System.out.println("The monster found you weak and did not pursue you.");
-            return true;
+            return true; //ran away
         }
-        else if (roll < 4) { 
+        else if (roll < 4) { //the roll failed
             System.out.println("You rolled a " + roll + "! You failed to run away from the monster!");
             monster.badStuffOccurs(user);
-            return false; //this will be used to return true if the user fails
-        } else {
+            return false; //run away fails
+        } else { //the roll succeeded
             System.out.println("You rolled a " + roll + "! You have successfully ran away from the monster!");
             System.out.println("You have not leveled up; you sleep the night in. Waking up to face the same door again.");
-            return true; //this will be used to return false if the user succeeds
+            return true; //ran away
         }
     }
 
@@ -320,11 +329,11 @@ class Game {
     public static void kickDownDoor() {
         System.out.println("\nYou kick down the door in front of you and find a monster!");
         Monster monster = newMonster(); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
-        if (monster == null) {
-            System.out.println("No monster found!"); //this will be used to display the random monster card that was drawn
+        if (monster == null) {//if no monster was returned, then no monster is found
+            System.out.println("No monster found!"); //this will be used to display the random monster that was drawn
             return; //this will be used to return if there is no monster   
         }
-        System.out.println("\n" + monster.toString()); //this will be used to display the random monster card that was drawn
+        System.out.println("\n" + monster.toString()); //this will be used to display the random monster that was drawn
         userFightChoose(monster); //this will be used to call the method to fight the monster
     }
 
@@ -332,14 +341,14 @@ class Game {
     public static void combat(Monster monster) {
         //if the user is a warrior, they just need to match the monster's level to defeat it
         if (user.getUserClass().equalsIgnoreCase("Warrior")) {
-            if (user.getAttackPower() >= monster.getLevel()) {
+            if (user.getAttackPower() >= monster.getLevel()) { //the warrior's AP has to be greater than or equal to the monster's level to beat it
                 System.out.println("\nYou have defeated the " + monster.getName() + "!");
                 lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
             } else {
                 System.out.println("You have been defeated by the " + monster.getName() + "!");
                 monster.badStuffOccurs(user);
             }
-            return;
+            return; //will return so the combat doesn't occur twice
         }
         //under normal circumstances, the user's AP must be greater than the monster's level
         if (user.getAttackPower() > monster.getLevel()) {
@@ -347,7 +356,7 @@ class Game {
             lootAndLevel(monster); //this will be used to call the method to give loot after defeating a monster
         } else {
             System.out.println("You have been defeated by the " + monster.getName() + "!");
-            monster.badStuffOccurs(user);
+            monster.badStuffOccurs(user); //bad stuff will happen to the user
         }
     }
 
@@ -360,7 +369,7 @@ class Game {
     //this method will ask the user if they want use any items in their inventory after they access their inventory
     public static void useItemChoice() {
         System.out.println("Would you like to use any items in your inventory? Y/N: ");
-        scanner.nextLine();
+        scanner.nextLine(); //used to help read in the choice
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
             System.out.println("What item would you like to use? (type in full name of item)"); //this will be used to ask the user what item they want to use
@@ -368,16 +377,13 @@ class Game {
             user.searchInventory(item); //this will be used to call the method to search the inventory for the possible item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
-        } /*else {
-            System.out.println("We are wasting time! Y or N!!");
-            useItemChoice(); //this will be used to call the method again if the user inputs an invalid choice
-        }*/
+        } 
     }
 
     //this method will ask the user if they want to discard any of their equipment after they access their equipment
     public static void discardEquippedChoice() {
         System.out.println("Would you like to discard any of your equipment? Y/N: ");
-        scanner.nextLine();
+        scanner.nextLine(); //used to help read in the choice
         String choice = scanner.nextLine(); //this will be used to get the user input of what they want to do
         if (choice.equalsIgnoreCase("Y")) {
             System.out.println("What item would you like to discard? (type in full name of item)"); //this will be used to ask the user what item they want to discard
@@ -385,15 +391,7 @@ class Game {
             user.discardEquipped(item); //this will be used to call the method to discard the equipped item
         } else if (choice.equalsIgnoreCase("N")) {
             System.out.println("Okay, then onward!");
-        } /*else {
-            System.out.println("We are wasting time! Y or N!!");
-            discardEquippedChoice(); //this will be used to call the method again if the user inputs an invalid choice
-        }*/
-    }
-
-    //activateSomeClassPassives method will activate some class passives that aren't already implemented in the game
-    public static void activateClassPassives() {
-
+        }
     }
 
     //This method serves as the main method to run the game.
@@ -404,15 +402,15 @@ class Game {
         gameIntro(); //call gameIntro method to start the game
         user.setLivability(true);
         starterItems(); //gives the user items in the beginning of the game
-        //activateSomeClassPassives(); //this will be used to activate some class passives that aren't already implemented in the game
         
         //do while loop to keep the game going until the user is level 10 or is dead
         do {
+            //if the user is a cleric and has nothing equipped, they gain a +2 AP bonus, otherwise, the bonus doesn't apply
             if (user.getUserClass().equalsIgnoreCase("Cleric")) {
-                if (user.getEquipment().isEmpty()) {
+                if (user.getEquipment().isEmpty()) { //if equipment is empty
                     user.addAttackPower(2);
                 }
-                else {
+                else { //if there is something in equipment
                     user.decreaseLevel();
                     user.decreaseLevel();
                 }

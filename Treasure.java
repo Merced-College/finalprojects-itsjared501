@@ -35,7 +35,5 @@ public class Treasure {
     public String toString() {
         return name + " (" + type + ") \n" + description;
     }
-
-    // Method to pull a treasure item from the user's inventory and apply its attack power to the user
     
 }

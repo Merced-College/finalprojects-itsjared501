@@ -22,7 +22,7 @@ public class Creature {
         //this.userGender = userGender;
     }
 
-    //The getters
+    //The getters and setters
     public String getName() {
         return name;
     }
@@ -60,37 +60,7 @@ public class Creature {
         return isAlive;
     }
 
-    //This method accesses the user's inventory and displays all the items in it.
-    public void accessInventory() {
-        //for loop to display all the items in the inventory
-        System.out.println("Inventory * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
-        if (inventory.size() == 0) {
-            System.out.println("Inventory is empty. \n");
-        }
-        /*for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(inventory.get(i).toString() + "\n");
-        }*/
-        for (Treasure item : inventory) {
-            System.out.println(item.toString() + "\n");
-        }
-        System.out.println("Inventory Size: " + inventorySizeCheck() +" * * * * * * * * * * * * * * * * * * * * * * * \n");
-    }
-
-    public void accessEquipment() {
-        //for loop to display all the items in the equipment
-        System.out.println("Equipment * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
-        if (equipment.size() == 0) {
-            System.out.println("Equipment is empty. \n");
-        }
-        /*for (int i = 0; i < equipment.size(); i++) {
-            System.out.println(equipment.get(i).toString() + "\n");
-        }*/
-        for (Treasure item : equipment) {
-            System.out.println(item.toString() + "\n");
-        }
-        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
-    }
-
+    //sets the class to the user and applies certain passives
     public void setClass (String chosenClass) {
         if (chosenClass.equalsIgnoreCase("cleric")) {
             userClass = "Cleric";
@@ -100,21 +70,22 @@ public class Creature {
         } 
         else if (chosenClass.equalsIgnoreCase("warrior")) {
             userClass = "Warrior";
-            attackPower++;
+            attackPower++; //warriors get a permanent +1 to AP
         } 
         else if (chosenClass.equalsIgnoreCase("wizard")) {
             userClass = "Wizard";
         }
         else {
             System.out.println("I believe you misheard me. Please select a class from the list above.");
-            selectClass();
+            selectClass(); //user selects the class again
         }
     }
 
+    //sets the race to the user and applies certain passives
     public void setRace (String chosenRace) {
         if (chosenRace.equalsIgnoreCase("dwarf")) {
             userRace = "Dwarf";
-            attackPower++;
+            attackPower++; //dwarves get a permanent +1 to AP
         } 
         else if (chosenRace.equalsIgnoreCase("elf")) {
             userRace = "Elven";
@@ -124,72 +95,99 @@ public class Creature {
         }
         else {
             System.out.println("I believe you misheard me. Please select a race from the list above.");
-            selectRace();
+            selectRace(); //user selects race again
         }
+    }
+
+    //This method accesses the user's inventory and displays all the items in it
+    public void accessInventory() {
+        //for loop to display all the items in the inventory
+        System.out.println("Inventory * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+        if (inventory.size() == 0) {//if there isn't anything in the inventory
+            System.out.println("Inventory is empty. \n");
+        }
+        for (Treasure item : inventory) { //enhanced for loop to print each item
+            System.out.println(item.toString() + "\n");
+        }
+        System.out.println("Inventory Size: " + inventorySizeCheck() +" * * * * * * * * * * * * * * * * * * * * * * * \n");
+    }
+
+    //this method accesses the user's equipment and displays all the items equipped
+    public void accessEquipment() {
+        //for loop to display all the items in the equipment
+        System.out.println("Equipment * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+        if (equipment.size() == 0) { //if there isn't anything in the equipment
+            System.out.println("Equipment is empty. \n");
+        }
+        for (Treasure item : equipment) { //enhanced for loop to print each item
+            System.out.println(item.toString() + "\n");
+        }
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
     }
 
     //This method increases the user's level when they defeat a monster.
     public void levelUp(Monster monster) {
-        if (monster.getLevel() >= 14) {
-            level = Math.min(level + 2, 10);
-            attackPower += 2;
+        if (monster.getLevel() >= 14) { //if the monster is level 14+, the user levels up twice
+            level = Math.min(level + 2, 10); //ensures the user won't go past level 10
+            attackPower += 2; //attack power is also increased by two because it increments with level
             System.out.println("You are now level " + level + "!");
-        } else {
-            level = Math.min(level + 1, 10);
-            attackPower++;
+        } else { //if the monster is level 12 or less, the user levels up once
+            level = Math.min(level + 1, 10); //ensures the user won't go past level 10
+            attackPower++; //attack power is also increased by two because it increments with level
             System.out.println("You are now level " + level + "!");
         }
     }
 
     //this method decreases the user's level and attack power due to bad stuff
     public void decreaseLevel() {
-        level--;
-        attackPower--;
+        level--; //level decrements by 1
+        attackPower--; //AP decrements by 1
     }
 
     //This method icreases the user's attack power from items and will immediately deactivate after the fight.
     public void tempAPAdd(int power) {
-        tempAttackPower = power;
-        attackPower += tempAttackPower;
+        tempAttackPower = power; //temporarily make the parameter the power increase
+        attackPower += tempAttackPower; //temporarily increase user's AP
     }
 
+    //this method will reset the temporary AP so that it goes away after combat
     public void resetTempAP() {
-        attackPower -= tempAttackPower;
-        tempAttackPower = 0;
+        attackPower -= tempAttackPower; //get rid of temporary attack power
+        tempAttackPower = 0; //temporary attack power is reset to zero so that the temporary attack power doesn't stack
     }
 
     //This method will be used to increase the user's attack power from weapons, armor, and footgear.
     public void addAttackPower(int power) {
-        attackPower += power;
+        attackPower += power; //increases AP based on modifier applied by weapons, armor, and footgear
         System.out.println("Attack power increased by " + power);
     }
 
     //This method ensures that the inventory size is checked before adding items to the inventory.
     public int inventorySizeCheck() {
-        if (userRace.equalsIgnoreCase("Dwarf")) {
+        if (userRace.equalsIgnoreCase("Dwarf")) { //dwarf passive gives them a bigger inventory
             return 12;
         }
-        else {
+        else { //regular inventory size
             return 10;
         }
     }
 
     //This method adds treasures gained from the fight to the user's inventory.
     public void addToInventory(Treasure newItem) {
-        if (inventory.size() >= inventorySizeCheck()) {
+        if (inventory.size() >= inventorySizeCheck()) { //ensures that the item can fit in the inventory
             System.out.println("Inventory is full. Cannot add more items.");
             return;
         }
-        else {
+        else { //add new item to inventory
             inventory.add(newItem);
         }
     }
 
     //This method removes treasures from the user's inventory.
     public void removeFromInventory(Treasure item) {
-        if (inventory.contains(item)) {
-            inventory.remove(item);
-        } else {
+        if (inventory.contains(item)) { //if the inventory contains the item
+            inventory.remove(item); //remove it
+        } else { //otherwise it cannot be found
             System.out.println("Item not found in inventory.");
         }
     }
@@ -197,17 +195,21 @@ public class Creature {
     //the method should iterate through the inventory and find the item with the matching name; if found, then use. else, cannot find
     public void useItem(Treasure item) {
         System.out.println("\nYou have used " + item.getName() + ".");
+        //if item is an equipment item, transfer it to equipment 
         if (item.getType().equalsIgnoreCase("armor") || item.getType().equalsIgnoreCase("hand") || item.getType().equalsIgnoreCase("two hands") || item.getType().equalsIgnoreCase("footgear")) {
-            addAttackPower(item.getAttackPower());
-            removeFromInventory(item);
-            equipment.add(item);
+            addAttackPower(item.getAttackPower()); //apply AP bonus
+            removeFromInventory(item); //removes item from inventory
+            equipment.add(item); //adds it to equipment
         }
+        //if item is a GUAL, make user level up
         else if (item.getType().equalsIgnoreCase("go up a level")) {
-            level++;
-            attackPower++;
-            removeFromInventory(item);
+            level++; //level up
+            attackPower++; //causes AP to increase as well
+            removeFromInventory(item); //removes item from inventory
         }
+        //if item is a combat item
         else if (item.getType().equalsIgnoreCase("item")) {
+            //if the user is a wizard, they get +2 bonus to magical items
             if (getUserClass().equalsIgnoreCase("Wizard")) {
                 if (item.getName().equalsIgnoreCase("Cotion of Ponfusion") || item.getName().equalsIgnoreCase("Flaming Poison Potion") ||
                     item.getName().equalsIgnoreCase("Potion of Halitosis") || item.getName().equalsIgnoreCase("Potion of Idiotic Bravery") || 
@@ -215,14 +217,15 @@ public class Creature {
                     item.getName().equalsIgnoreCase("Electric Radioactive Acid Potion") || item.getName().equalsIgnoreCase("Freezing Explosive Potion") ||
                     item.getName().equalsIgnoreCase("Friendship Potion") || item.getName().equalsIgnoreCase("Spell Scroll: Flame Wall") ||
                     item.getName().equalsIgnoreCase("Potion of backstabbery") || item.getName().equalsIgnoreCase("Magic Missile")) {
-                    tempAPAdd(item.getAttackPower());
-                    tempAPAdd(2);
-                    removeFromInventory(item);
-                    return;
+                    tempAPAdd(item.getAttackPower()); //item temporarily buffs user
+                    tempAPAdd(2); //wizard bonus
+                    removeFromInventory(item); //removes item from inventory
+                    return; //return so that the user doesn't get buffed again
                 }
             }
-            tempAPAdd(item.getAttackPower());
-            removeFromInventory(item);
+            //otherwise, temporarily buff user normally
+            tempAPAdd(item.getAttackPower()); //item temporarily buffs user
+            removeFromInventory(item); //removes item from inventory
         }
         else {
             System.out.println("Item cannot be used.");
@@ -231,9 +234,9 @@ public class Creature {
 
     //this method will search the user's inventory for a specific item and use it and remove it from the inventory
     public void searchInventory(String itemName) {
-        for (int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < inventory.size(); i++) { //searches inventory for chosen item
             if (inventory.get(i).getName().equalsIgnoreCase(itemName.trim())) {
-                useItem(inventory.get(i));
+                useItem(inventory.get(i)); //uses and removes item
                 return;
             }
         }
@@ -242,18 +245,20 @@ public class Creature {
 
     //this method will search the user's equipment for a specific item and remove it from the equipment
     public void discardEquipped(String itemName) {
-        for (int i = 0; i < equipment.size(); i++) {
-            if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) {
-                Treasure item = equipment.get(i);
-                attackPower -= item.getAttackPower();
-                equipment.remove(i);
+        for (int i = 0; i < equipment.size(); i++) { //searches the equipped items for specific item
+            if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) { //if found
+                Treasure item = equipment.get(i); //the item gets specified
+                attackPower -= item.getAttackPower(); //remove the specified item's AP bonus
+                equipment.remove(i); //discard item
                 System.out.println(item.getName() + " has been discarded.");
                 return;
             }
         }
+        //if not found
         System.out.println("Item not found in equipment.");
     }
 
+    //called in gameIntro() to allow user to choose a class
     public void selectClass() {
         //display all classes and their passives
         System.out.println(" ");
@@ -286,11 +291,12 @@ public class Creature {
         System.out.println("                   Monsters receive -1 to their attack power.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a class by entering the class you want to select. "); //ask for int (class)
-        String classSelection = scanner.nextLine();
+        System.out.print("Select a class by entering the class you want to select. "); 
+        String classSelection = scanner.nextLine(); //user selects one
         setClass(classSelection); //this will be used to set the class of the user
     }
 
+    //called in gameIntro() to allow user to choose a race
     public void selectRace() {
         //display all races and their advantages and disadvantages
         System.out.println(" ");
@@ -317,8 +323,8 @@ public class Creature {
         System.out.println("                         You are immune to the bad stuff of Monsters level 1-10.");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println(" ");
-        System.out.print("Select a race by entering the race you want to select. "); //ask for int (race)
-        String raceSelection = scanner.nextLine();
+        System.out.print("Select a race by entering the race you want to select. "); 
+        String raceSelection = scanner.nextLine(); //user selects one
         setRace(raceSelection); //this will be used to set the race of the user
     }
 }
