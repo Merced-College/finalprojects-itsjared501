@@ -1,6 +1,3 @@
-//Jared Lee
-//April 29, 2025
-//This is a text-based RPG game based on the card game Munchkin.
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Game.java
+ * @author Jared Lee
+ * @since 2025-04-29
+ * @version 1.0
+ * Main class for the Munchkin game
+ * A test-based RPG game based on the card game Munchkin
+ */
 //this class serves as the main class for the game, including main aspects of the game, inclduing intro, combat, and other game loops.
 class Game {
     private static Scanner scanner = new Scanner(System.in); //this will be used to create a scanner object to read user input
@@ -91,7 +96,13 @@ class Game {
         return monsterMap;
     }
 
-    //This method serves as getting the user ready for the game, asking for name, gender, class, and race.
+
+    /**
+     * Method to introduce the user to the game, asking for their name, class, and race
+     * Postcondition: user object is created with the name and the user has selected their clas and race.
+     * @throws InterruptedException
+     *     used for the thread.sleep method
+     */
     public static void gameIntro() throws InterruptedException { //The thread.sleep method is used and pulled from copilot
 
         //Introduce the user to the game and ask for their information.
@@ -144,7 +155,14 @@ class Game {
         }
     }
 
-    //the method will pull a random treasure object from the treasureMap and return it
+    /**
+     * the method will pull a random treasure object from the treasureMap
+     * precondition: the treasureMap exists
+     * postcondition: user gained a treasure
+     * @param treasureMap
+     * @return selectedTreasure
+     *     the treasure object that was selected
+     */
     public static Treasure getRandomTreasure(Map<String, Treasure> treasureMap) {
         //if the map is empty, then display that no treasures are available
         if (treasureMap.isEmpty()) {
@@ -167,7 +185,14 @@ class Game {
         return selectedTreasure;
     }
 
-    //the method will pull a random monster object from the monsterMap and return it
+    /**
+     * the method will pull a random monster object from the monsterMap
+     * precondition: the monsterMap exists
+     * postcondition: user fights a monster
+     * @param monsterMap
+     * @return selectedMonster
+     *     the monster object that was selected
+     */
     public static Monster getRandomMonster(Map<String, Monster> monsterMap) {
         //if the map is empty, then display that no monsters are available
         if (monsterMap.isEmpty()) {
@@ -299,7 +324,14 @@ class Game {
     }
 
 
-    //This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
+    /**
+     * This algorithm will be used when the user decides to run away from a monster, determining if they are successful.
+     * Precondition: the user is in combat with a monster and has chosen to run away
+     * Postcondition: the user has either ran away successfully or now faces bad stuff
+     * @param monster
+     * @return
+     *   true if the user ran away successfully, false if they failed
+     */
     public static boolean runAway(Monster monster) {
         Random random = new Random();
         int bonus = 0; //a bonus that only applies under certain circumstances
@@ -325,7 +357,7 @@ class Game {
         }
     }
 
-    //kickDownDoor method (draw a monster card) / also serving as the combat loop
+    //this method makes the user face a monster and go into combat
     public static void kickDownDoor() {
         System.out.println("\nYou kick down the door in front of you and find a monster!");
         Monster monster = newMonster(); //this will be used to get a random monster card from the hashmap and remove it from the hashmap
@@ -394,7 +426,12 @@ class Game {
         }
     }
 
-    //This method serves as the main method to run the game.
+    /**
+     * Main method to run the game
+     * @param args
+     * @throws InterruptedException
+     *   used for the thread.sleep method that is used in the gameIntro method
+     */
     public static void main(String[] args) throws InterruptedException {
         treasureMap = readTreasureCards("Treasure Cards(Sheet1) (1).csv"); //this will be used to read the treasure cards from the csv file
         monsterMap = readMonsterCards("Monster Cards(Sheet1).csv"); //this will be used to read the monster cards from the csv file
@@ -403,7 +440,7 @@ class Game {
         user.setLivability(true);
         starterItems(); //gives the user items in the beginning of the game
         
-        //do while loop to keep the game going until the user is level 10 or is dead
+        //do-while loop to keep the game going until the user is level 10 or is dead
         do {
             //if the user is a cleric and has nothing equipped, they gain a +2 AP bonus, otherwise, the bonus doesn't apply
             if (user.getUserClass().equalsIgnoreCase("Cleric")) {
@@ -421,7 +458,7 @@ class Game {
         
         gameOutro(); //the user has reached level 10 or has died
 
-        scanner.close(); //this will be used to close the scanner
+        scanner.close();
     }
     
     

@@ -1,5 +1,10 @@
 
-
+/**
+ * Treasure.java
+ * @author Jared Lee
+ * Object-class that represents the treasures in the game
+ *      contains the treasure's name, type, attack power, and description
+ */
 public class Treasure {
     private String type; // e.g., "Armor", "Hand"
     private String name;    // Unique key (column 2)

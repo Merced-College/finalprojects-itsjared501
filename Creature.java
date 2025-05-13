@@ -1,6 +1,12 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Creature.java
+ * @author Jared Lee
+ * Object-class that represents the user in the game
+ *      contains the user's name, class, race, level, attack power, inventory, and equipment
+ */
 public class Creature {
     private String name;
     private String userClass;
@@ -192,7 +198,41 @@ public class Creature {
         }
     }
 
-    //the method should iterate through the inventory and find the item with the matching name; if found, then use. else, cannot find
+    //this method will search the user's inventory for a specific item and use it and remove it from the inventory
+    public void searchInventory(String itemName) {
+        for (int i = 0; i < inventory.size(); i++) { //searches inventory for chosen item
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName.trim())) {
+                useItem(inventory.get(i)); //uses and removes item
+                return;
+            }
+        }
+        System.out.println("Item not found in inventory.");
+    }
+
+    //this method will search the user's equipment for a specific item and remove it from the equipment
+    public void discardEquipped(String itemName) {
+        for (int i = 0; i < equipment.size(); i++) { //searches the equipped items for specific item
+            if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) { //if found
+                Treasure item = equipment.get(i); //the item gets specified
+                attackPower -= item.getAttackPower(); //remove the specified item's AP bonus
+                equipment.remove(i); //discard item
+                System.out.println(item.getName() + " has been discarded.");
+                return;
+            }
+        }
+        //if not found
+        System.out.println("Item not found in equipment.");
+    }
+
+    /**
+     * the method should iterate through the inventory and find the item with the matching name; 
+     *      if found, then use. else, cannot find
+     * Precondition: searchInventory() has been called and has found the item
+     * Postcondition: the item has been used and removed from the inventory
+     *      the item's bonuses has been applied to the user
+     * @param item
+     *      the item to be used
+     */
     public void useItem(Treasure item) {
         System.out.println("\nYou have used " + item.getName() + ".");
         //if item is an equipment item, transfer it to equipment 
@@ -230,32 +270,6 @@ public class Creature {
         else {
             System.out.println("Item cannot be used.");
         }
-    }
-
-    //this method will search the user's inventory for a specific item and use it and remove it from the inventory
-    public void searchInventory(String itemName) {
-        for (int i = 0; i < inventory.size(); i++) { //searches inventory for chosen item
-            if (inventory.get(i).getName().equalsIgnoreCase(itemName.trim())) {
-                useItem(inventory.get(i)); //uses and removes item
-                return;
-            }
-        }
-        System.out.println("Item not found in inventory.");
-    }
-
-    //this method will search the user's equipment for a specific item and remove it from the equipment
-    public void discardEquipped(String itemName) {
-        for (int i = 0; i < equipment.size(); i++) { //searches the equipped items for specific item
-            if (equipment.get(i).getName().equalsIgnoreCase(itemName.trim())) { //if found
-                Treasure item = equipment.get(i); //the item gets specified
-                attackPower -= item.getAttackPower(); //remove the specified item's AP bonus
-                equipment.remove(i); //discard item
-                System.out.println(item.getName() + " has been discarded.");
-                return;
-            }
-        }
-        //if not found
-        System.out.println("Item not found in equipment.");
     }
 
     //called in gameIntro() to allow user to choose a class

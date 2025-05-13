@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * Monster.java
+ * @author Jared Lee
+ * Object-class that represents the monsters in the game
+ *      contains the monster's name, level, description, and bad stuff
+ */
 public class Monster {
     private String name;
     private int level;
@@ -14,7 +20,14 @@ public class Monster {
         this.badStuff = badStuff;
     }
 
-    //the method serves as a way to apply the bad stuff of the monster in question to the user
+    /**
+     * The method serves as a way to apply the bad stuff of the monster in question to the user
+     * precondition: the user failed to run away from the monster in combat
+     * postcondition: the user faces the consequences of the monster's bad stuff
+     * @param user
+     * @return bad stuff
+     *      lose an item, lose a level, die
+     */
     public void badStuffOccurs(Creature user) {
         //if the user is a halfling, they ignore the bad stuff of monsters level 1-10
         if (user.getUserClass().equalsIgnoreCase("Halfling") && getLevel() <= 10) {
